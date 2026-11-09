@@ -1,0 +1,6 @@
+{
+  "name": "استوديو التطبيقات الذكية | App Studio Hub",
+  "description": "منصة تفاعلية متطورة للمطورين وصناع التطبيقات لبناء وتخصيص تطبيقات الويب ولوحات التحكم مع دعم كامل للغة العربية والإنجليزية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

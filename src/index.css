@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-arabic-sans: 'Cairo', system-ui, -apple-system, sans-serif;
+    --font-arabic-serif: 'Amiri', serif;
+    --font-latin: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  [dir="rtl"] {
+    font-family: var(--font-arabic-sans);
+  }
+
+  [dir="ltr"] {
+    font-family: var(--font-latin);
+  }
+
+  .font-arabic-serif {
+    font-family: var(--font-arabic-serif);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
