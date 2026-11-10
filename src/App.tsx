@@ -32,7 +32,6 @@ import {
   HelpCircle
 } from 'lucide-react';
 
-// Data types
 interface LegalAidRequest {
   id: string;
   fullName: string;
@@ -112,7 +111,7 @@ const FUNDABLE_PROGRAMS: ProgramFund[] = [
     descriptionAr: 'تسيير طواقم محامين ومستشارين ميدانيين لتقديم الاستشارات الفورية، وعقد جلسات التوعية الحقوقية في المناطق المصنفة الأكثر تهميشاً وصعوبة وصول في الضفة الغربية والقدس وغزة.',
     descriptionEn: 'Deploying specialized legal mobile units and grassroots lawyers to provide free counseling and rights literacy sessions in underserved communities.',
     indicators: ['45 جولة ميدانية سنوياً', '2,400 مستفيد مباشر', 'استشارات أراضي وتثبيت ملكية'],
-    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80'
+    imageUrl: '/images/mobile_legal_clinic_rural_179422590146.jpg'
   },
   {
     id: 'indigent-defense',
@@ -126,7 +125,7 @@ const FUNDABLE_PROGRAMS: ProgramFund[] = [
     descriptionAr: 'كفالة أتعاب المحامين ورسوم التقاضي والخبراء للأفراد والأسر غير القادرين مادياً على توكيل محامين، وضمان حق كل مواطن في محاكمة عادلة دون تمييز.',
     descriptionEn: 'Covering court filing expenses, independent expert fees, and specialized attorney representation for individuals who cannot afford counsel.',
     indicators: ['420 دعوى قضائية مجانية', 'نسبة إنصاف وتحصيل حقوق 89%', 'تمثيل في المحاكم النظامية والشرعية'],
-    imageUrl: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80'
+    imageUrl: '/images/legal_aid_consultation_1794225900412.jpg'
   },
   {
     id: 'women-youth',
@@ -140,7 +139,7 @@ const FUNDABLE_PROGRAMS: ProgramFund[] = [
     descriptionAr: 'تقديم الحماية والاستشارات القانونية المتخصصة للنساء في قضايا الحضانة والنفقة والإرث، بالإضافة إلى حماية حقوق الشباب والعمال في المنشآت الصغيرة.',
     descriptionEn: 'Dedicated legal aid clinic providing counseling on inheritance, custody, domestic safety, and young worker wage protection.',
     indicators: ['1,650 استشارة مجانية', '18 ورشة تدريب وتوعية', 'دعم الخط القانوني السري'],
-    imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80'
+    imageUrl: '/images/feature_dashboard_preview_179422588312.jpg'
   },
   {
     id: 'land-defense',
@@ -154,7 +153,7 @@ const FUNDABLE_PROGRAMS: ProgramFund[] = [
     descriptionAr: 'فريق قانوني-هندسي متخصص للتعامل العاجل مع إخطارات وقف البناء والهدم، وتجهيز الملفات القانونية والتنظيمية وإيداع الاعتراضات أمام الجهات المختصة.',
     descriptionEn: 'Interdisciplinary legal-spatial response team submitting urgent administrative appeals against demolition notices and safeguarding deed archives.',
     indicators: ['تجميد 82 أمر هدم', 'حماية 120 عقاراً ومزرعة', 'أرشفة قانونية رقمية للوثائق'],
-    imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'
+    imageUrl: '/images/governance_transparency_report_1794225900485.jpg'
   }
 ];
 
@@ -258,7 +257,7 @@ const FAQ_ITEMS: FAQItem[] = [
     categoryEn: 'Confidentiality',
     questionAr: 'كيف تضمن الجمعية سرية معلوماتي وخصوصية ملفي القانوني؟',
     questionEn: 'How does Asrar ensure client confidentiality and data privacy?',
-    answerAr: 'تلتزم الجمعية التزاماً صارماً بأحكام السرية المهنية للمحاماة وفق أحكام قانون المحامين النظاميين الفلسطيني وميثاق شرف العمل الأهلي. لا يُطلع على وقائع الملف ومستنداته سوى المحامي المباشر المكلف والمستشار المشرف. وتُحفظ كافة السجلات الرقمية والورقية ضمن خوادم وأنظمة مشفرة وآمنة تماماً.',
+    answerAr: 'تلتزم الجمعية التزاما صارماً بأحكام السرية المهنية للمحاماة وفق أحكام قانون المحامين النظاميين الفلسطيني وميثاق شرف العمل الأهلي. لا يُطلع على وقائع الملف ومستنداته سوى المحامي المباشر المكلف والمستشار المشرف. وتُحفظ كافة السجلات الرقمية والورقية ضمن خوادم وأنظمة مشفرة وآمنة تماماً.',
     answerEn: 'All client information and evidentiary documents are protected under statutory attorney-client privilege as codified in Palestinian Bar Law. Only the assigned advocate and senior supervising jurist access the case materials, which are archived on secure encrypted systems.'
   },
   {
@@ -285,7 +284,6 @@ export default function App() {
   const [lang, setLang] = useState<'ar' | 'en'>('ar');
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-  // Application & Request State
   const [requestsList, setRequestsList] = useState<LegalAidRequest[]>([
     {
       id: 'ASRAR-2026-8941',
@@ -313,7 +311,6 @@ export default function App() {
     }
   ]);
 
-  // Form states
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [governorate, setGovernorate] = useState(PALESTINIAN_GOVERNORATES[0]);
@@ -322,33 +319,22 @@ export default function App() {
   const [details, setDetails] = useState('');
   const [submittedCode, setSubmittedCode] = useState<string | null>(null);
 
-  // Status search state
   const [searchCode, setSearchCode] = useState('');
   const [searchedRequest, setSearchedRequest] = useState<LegalAidRequest | null | 'not_found'>(null);
 
-  // Interactive Impact Calculator State for Donors
   const [donationAmount, setDonationAmount] = useState<number>(1000);
 
-  // Partnership Proposal Form State
   const [partnerOrg, setPartnerOrg] = useState('');
   const [partnerEmail, setPartnerEmail] = useState('');
-  const [partnerType, setPartnerType] = useState('منظمة دولية / مانح مؤسسي');
   const [partnerMessage, setPartnerMessage] = useState('');
   const [partnerSubmitted, setPartnerSubmitted] = useState(false);
 
-  // Volunteer Opportunities Form State
   const [volName, setVolName] = useState('');
   const [volPhone, setVolPhone] = useState('');
   const [volEmail, setVolEmail] = useState('');
-  const [volRole, setVolRole] = useState('محامٍ مزاول (عضو نقابة المحامين)');
-  const [volSpecialty, setVolSpecialty] = useState('قضايا الأراضي والملكية ومقاومة إخطارات الهدم');
-  const [volGov, setVolGov] = useState(PALESTINIAN_GOVERNORATES[1]);
-  const [volType, setVolType] = useState('التمثيل القضائي التطوعي والترافع أمام المحاكم');
-  const [volHours, setVolHours] = useState('2 - 4 ساعات أسبوعياً');
   const [volBio, setVolBio] = useState('');
   const [volSubmittedCode, setVolSubmittedCode] = useState<string | null>(null);
 
-  // FAQ Accordion State
   const [openFaqId, setOpenFaqId] = useState<string | null>('faq-1');
 
   const toggleFaq = (id: string) => {
@@ -497,30 +483,14 @@ export default function App() {
         </div>
 
         <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-stone-600 dark:text-stone-300">
-          <a href="#about" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">
-            {isRtl ? 'عن الجمعية' : 'About Asrar'}
-          </a>
-          <a href="#services" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">
-            {isRtl ? 'الخدمات القانونية' : 'Legal Services'}
-          </a>
-          <a href="#aid-form" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">
-            {isRtl ? 'طلب مساعدة مجانية' : 'Apply for Legal Aid'}
-          </a>
-          <a href="#programs" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">
-            {isRtl ? 'مشاريع التمويل والشراكة' : 'Grant Programs & Funding'}
-          </a>
-          <a href="#contact" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">
-            {isRtl ? 'الاتصال والمقر' : 'Contact Us'}
-          </a>
-          <a href="#library" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">
-            {isRtl ? 'المكتبة الحقوقية' : 'Rights Guides'}
-          </a>
-          <a href="#volunteer" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0 text-amber-800 dark:text-amber-400 font-semibold">
-            {isRtl ? 'فرص التطوع' : 'Volunteer'}
-          </a>
-          <a href="#faq" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">
-            {isRtl ? 'أسئلة شائعة' : 'FAQ'}
-          </a>
+          <a href="#about" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">{isRtl ? 'عن الجمعية' : 'About Asrar'}</a>
+          <a href="#services" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">{isRtl ? 'الخدمات القانونية' : 'Legal Services'}</a>
+          <a href="#aid-form" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">{isRtl ? 'طلب مساعدة مجانية' : 'Apply for Legal Aid'}</a>
+          <a href="#programs" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">{isRtl ? 'مشاريع التمويل والشراكة' : 'Grant Programs & Funding'}</a>
+          <a href="#contact" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">{isRtl ? 'الاتصال والمقر' : 'Contact Us'}</a>
+          <a href="#library" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">{isRtl ? 'المكتبة الحقوقية' : 'Rights Guides'}</a>
+          <a href="#volunteer" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0 text-amber-800 dark:text-amber-400 font-semibold">{isRtl ? 'فرص التطوع' : 'Volunteer'}</a>
+          <a href="#faq" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">{isRtl ? 'أسئلة شائعة' : 'FAQ'}</a>
         </nav>
 
         <div className="flex items-center gap-3 shrink-0">
@@ -549,7 +519,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* 2. HERO SECTION WITH UNSPLASH IMAGE */}
+      {/* 2. HERO SECTION WITH UPLOADED PUBLIC IMAGE */}
       <section id="about" className="relative overflow-hidden border-b border-stone-200 bg-[#FAF8F5] py-16 lg:py-24 dark:border-stone-800 dark:bg-stone-950">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
@@ -620,11 +590,11 @@ export default function App() {
               </div>
             </div>
 
-            {/* Hero Image from Unsplash */}
+            {/* Hero Image linked from public/images */}
             <div className="lg:col-span-5">
               <div className="relative overflow-hidden rounded-2xl shadow-xl border border-stone-200 dark:border-stone-800">
                 <img
-                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80"
+                  src="/images/hero_justice_palestine_legal_1794225801073.jpg"
                   alt="Justice and Legal Aid"
                   className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500"
                 />
@@ -881,7 +851,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 5. FUNDABLE PROGRAMS WITH UNSPLASH IMAGES */}
+      {/* 5. FUNDABLE PROGRAMS WITH UPLOADED PUBLIC IMAGES */}
       <section id="programs" className="border-b border-stone-200 bg-white py-16 dark:border-stone-800 dark:bg-stone-900">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center max-w-2xl mx-auto mb-12">
