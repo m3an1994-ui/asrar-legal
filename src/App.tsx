@@ -58,6 +58,7 @@ interface ProgramFund {
   descriptionAr: string;
   descriptionEn: string;
   indicators: string[];
+  imageUrl: string;
 }
 
 interface LegalGuide {
@@ -110,7 +111,8 @@ const FUNDABLE_PROGRAMS: ProgramFund[] = [
     beneficiariesCount: 2400,
     descriptionAr: 'تسيير طواقم محامين ومستشارين ميدانيين لتقديم الاستشارات الفورية، وعقد جلسات التوعية الحقوقية في المناطق المصنفة الأكثر تهميشاً وصعوبة وصول في الضفة الغربية والقدس وغزة.',
     descriptionEn: 'Deploying specialized legal mobile units and grassroots lawyers to provide free counseling and rights literacy sessions in underserved communities.',
-    indicators: ['45 جولة ميدانية سنوياً', '2,400 مستفيد مباشر', 'استشارات أراضي وتثبيت ملكية']
+    indicators: ['45 جولة ميدانية سنوياً', '2,400 مستفيد مباشر', 'استشارات أراضي وتثبيت ملكية'],
+    imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'indigent-defense',
@@ -123,7 +125,8 @@ const FUNDABLE_PROGRAMS: ProgramFund[] = [
     beneficiariesCount: 420,
     descriptionAr: 'كفالة أتعاب المحامين ورسوم التقاضي والخبراء للأفراد والأسر غير القادرين مادياً على توكيل محامين، وضمان حق كل مواطن في محاكمة عادلة دون تمييز.',
     descriptionEn: 'Covering court filing expenses, independent expert fees, and specialized attorney representation for individuals who cannot afford counsel.',
-    indicators: ['420 دعوى قضائية مجانية', 'نسبة إنصاف وتحصيل حقوق 89%', 'تمثيل في المحاكم النظامية والشرعية']
+    indicators: ['420 دعوى قضائية مجانية', 'نسبة إنصاف وتحصيل حقوق 89%', 'تمثيل في المحاكم النظامية والشرعية'],
+    imageUrl: 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'women-youth',
@@ -136,7 +139,8 @@ const FUNDABLE_PROGRAMS: ProgramFund[] = [
     beneficiariesCount: 1650,
     descriptionAr: 'تقديم الحماية والاستشارات القانونية المتخصصة للنساء في قضايا الحضانة والنفقة والإرث، بالإضافة إلى حماية حقوق الشباب والعمال في المنشآت الصغيرة.',
     descriptionEn: 'Dedicated legal aid clinic providing counseling on inheritance, custody, domestic safety, and young worker wage protection.',
-    indicators: ['1,650 استشارة مجانية', '18 ورشة تدريب وتوعية', 'دعم الخط القانوني السري']
+    indicators: ['1,650 استشارة مجانية', '18 ورشة تدريب وتوعية', 'دعم الخط القانوني السري'],
+    imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 'land-defense',
@@ -149,7 +153,8 @@ const FUNDABLE_PROGRAMS: ProgramFund[] = [
     beneficiariesCount: 880,
     descriptionAr: 'فريق قانوني-هندسي متخصص للتعامل العاجل مع إخطارات وقف البناء والهدم، وتجهيز الملفات القانونية والتنظيمية وإيداع الاعتراضات أمام الجهات المختصة.',
     descriptionEn: 'Interdisciplinary legal-spatial response team submitting urgent administrative appeals against demolition notices and safeguarding deed archives.',
-    indicators: ['تجميد 82 أمر هدم', 'حماية 120 عقاراً ومزرعة', 'أرشفة قانونية رقمية للوثائق']
+    indicators: ['تجميد 82 أمر هدم', 'حماية 120 عقاراً ومزرعة', 'أرشفة قانونية رقمية للوثائق'],
+    imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'
   }
 ];
 
@@ -337,7 +342,7 @@ export default function App() {
   const [volEmail, setVolEmail] = useState('');
   const [volRole, setVolRole] = useState('محامٍ مزاول (عضو نقابة المحامين)');
   const [volSpecialty, setVolSpecialty] = useState('قضايا الأراضي والملكية ومقاومة إخطارات الهدم');
-  const [volGov, setVolGov] = useState(PALESTINIAN_GOVERNORATES[1]); // رام الله والبيرة
+  const [volGov, setVolGov] = useState(PALESTINIAN_GOVERNORATES[1]);
   const [volType, setVolType] = useState('التمثيل القضائي التطوعي والترافع أمام المحاكم');
   const [volHours, setVolHours] = useState('2 - 4 ساعات أسبوعياً');
   const [volBio, setVolBio] = useState('');
@@ -363,7 +368,6 @@ export default function App() {
 
   const isRtl = lang === 'ar';
 
-  // Sync lang & theme
   useEffect(() => {
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -377,7 +381,6 @@ export default function App() {
     }
   }, [theme]);
 
-  // Submit legal aid request
   const handleSubmitRequest = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim() || !phone.trim() || !details.trim()) return;
@@ -403,7 +406,6 @@ export default function App() {
     setDetails('');
   };
 
-  // Search request status
   const handleSearchStatus = (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchCode.trim()) return;
@@ -417,14 +419,12 @@ export default function App() {
     }
   };
 
-  // Submit partnership form
   const handlePartnerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!partnerOrg || !partnerEmail) return;
     setPartnerSubmitted(true);
   };
 
-  // Calculate impact numbers based on donation amount
   const calculateImpact = (amount: number) => {
     const cases = Math.max(1, Math.floor(amount / 250));
     const consultations = Math.floor(amount / 40);
@@ -482,15 +482,12 @@ export default function App() {
       {/* 1. TOP BAR CONTRACT */}
       <header className="sticky top-0 z-40 flex items-center justify-between gap-8 border-b border-stone-200 bg-[#FAF8F5]/95 px-6 py-4 backdrop-blur-md dark:border-stone-800 dark:bg-stone-950/95">
         
-        {/* Zone 1: Single text element wordmark with official logo */}
         <div className="flex items-center gap-3 shrink-0">
-          <img
-            src="/assets/aistudio/logo_b3627de6.png"
-            alt="شعار جمعية أسرار للمساعدة القانونية"
-            className="h-12 w-12 object-contain shrink-0 rounded-full bg-white p-0.5 shadow-sm ring-1 ring-stone-200 dark:ring-stone-700"
-          />
+          <div className="h-12 w-12 rounded-full bg-amber-800 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+            أ
+          </div>
           <div>
-            <a href="#" className="text-lg font-bold tracking-tight text-stone-900 dark:text-white whitespace-nowrap shrink-0 block leading-tight font-arabic-serif">
+            <a href="#" className="text-lg font-bold tracking-tight text-stone-900 dark:text-white whitespace-nowrap shrink-0 block leading-tight">
               {isRtl ? 'جمعية أسرار للمساعدة القانونية' : 'Asrar Legal Aid Association'}
             </a>
             <span className="text-[11px] text-stone-500 dark:text-stone-400 block">
@@ -499,7 +496,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Zone 2: Navigation links */}
         <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-stone-600 dark:text-stone-300">
           <a href="#about" className="hover:text-stone-950 dark:hover:text-white transition-colors whitespace-nowrap shrink-0">
             {isRtl ? 'عن الجمعية' : 'About Asrar'}
@@ -527,19 +523,15 @@ export default function App() {
           </a>
         </nav>
 
-        {/* Zone 3: Controls & Primary Action */}
         <div className="flex items-center gap-3 shrink-0">
-          {/* Language Switcher */}
           <button
             onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-stone-700 hover:text-stone-950 rounded-lg border border-stone-200 dark:border-stone-800 dark:text-stone-300 dark:hover:text-white transition-colors whitespace-nowrap shrink-0"
-            title={isRtl ? 'Switch to English' : 'التحويل إلى العربية'}
           >
             <Globe className="h-3.5 w-3.5" />
             <span>{isRtl ? 'English' : 'العربية'}</span>
           </button>
 
-          {/* Theme Toggle */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             className="p-2 text-stone-700 hover:text-stone-950 rounded-lg border border-stone-200 dark:border-stone-800 dark:text-stone-300 dark:hover:text-white transition-colors shrink-0"
@@ -548,7 +540,6 @@ export default function App() {
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
 
-          {/* Primary CTA for Donors & Partners */}
           <a
             href="#partnership"
             className="px-4 py-2 text-xs font-semibold text-white bg-amber-800 hover:bg-amber-900 dark:bg-amber-600 dark:hover:bg-amber-700 rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-sm"
@@ -558,21 +549,13 @@ export default function App() {
         </div>
       </header>
 
-      {/* 2. HERO INSTITUTIONAL MARQUEE */}
+      {/* 2. HERO SECTION WITH UNSPLASH IMAGE */}
       <section id="about" className="relative overflow-hidden border-b border-stone-200 bg-[#FAF8F5] py-16 lg:py-24 dark:border-stone-800 dark:bg-stone-950">
         <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 items-stretch gap-12 lg:grid-cols-12">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
             
-            {/* Text & Institutional Narrative Column */}
             <div className="flex flex-col justify-center lg:col-span-7">
-              
-              {/* Unboxed institutional kicker with logo emblem */}
               <div className="flex items-center gap-2.5 text-xs font-semibold text-amber-800 dark:text-amber-400 mb-4">
-                <img
-                  src="/assets/aistudio/logo_b3627de6.png"
-                  alt="شعار جمعية أسرار"
-                  className="h-8 w-8 object-contain rounded-full bg-white p-0.5 shadow-xs ring-1 ring-amber-300 dark:ring-amber-800 shrink-0"
-                />
                 <span>{isRtl ? 'جمعية أهلية غير ربحية مرخصة في فلسطين' : 'Registered Non-Profit NGO in Palestine'}</span>
                 <span aria-hidden="true">·</span>
                 <span>{isRtl ? 'تعزيز سيادة القانون والمساعدة القضائية الشاملة' : 'Rule of Law & Comprehensive Legal Aid'}</span>
@@ -594,11 +577,10 @@ export default function App() {
 
               <p className="mt-6 max-w-2xl text-base text-stone-700 sm:text-lg dark:text-stone-300 leading-relaxed font-sans">
                 {isRtl
-                  ? 'تسعى جمعية أسرار للمساعدة القانونية إلى تعزيز سيادة القانون وتمكين المجتمع حقوقياً وقانونياً، وتلتزم بتقديم الدعم والمساعدة القانونية الشاملة والاستشارات الحقوقية للفئات المستحقة والمهمشة، وترسيخ مفاهيم العدالة والشفافية.'
-                  : 'Asrar Association for Legal Aid promotes the rule of law and community legal empowerment across Palestine, providing free comprehensive defense and counseling to marginalized and underserved groups while entrenching justice and transparency.'}
+                  ? 'تسعى جمعية أسرار للمساعدة القانونية إلى تعزيز سيادة القانون وتمكين المجتمع حقوقياً وقانونياً، وتلتزم بتقديم الدعم والمساعدة القانونية الشاملة والاستشارات الحقوقية للفئات المستحقة والمهمشة.'
+                  : 'Asrar Association for Legal Aid promotes the rule of law and community legal empowerment across Palestine, providing free comprehensive defense and counseling to marginalized groups.'}
               </p>
 
-              {/* Action Buttons for Beneficiaries & Donors */}
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <a
                   href="#aid-form"
@@ -618,1522 +600,547 @@ export default function App() {
                 </a>
               </div>
 
-              {/* Institutional Indicators (Quiet Unboxed Row) */}
               <div className="mt-12 grid grid-cols-2 gap-6 border-t border-stone-200 pt-6 sm:grid-cols-4 dark:border-stone-800">
                 <div>
                   <div className="text-2xl font-bold font-mono tabular-nums text-stone-950 dark:text-white">4,850+</div>
-                  <div className="text-xs text-stone-600 dark:text-stone-400 mt-1">
-                    {isRtl ? 'استشارة قانونية مجانية قُدمت' : 'Free Legal Consultations'}
-                  </div>
+                  <div className="text-xs text-stone-600 dark:text-stone-400 mt-1">{isRtl ? 'استشارة قانونية' : 'Consultations'}</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold font-mono tabular-nums text-stone-950 dark:text-white">610+</div>
-                  <div className="text-xs text-stone-600 dark:text-stone-400 mt-1">
-                    {isRtl ? 'قضية أمام المحاكم تم الترافع فيها' : 'Court Cases Represented'}
-                  </div>
+                  <div className="text-2xl font-bold font-mono tabular-nums text-stone-950 dark:text-white">820+</div>
+                  <div className="text-xs text-stone-600 dark:text-stone-400 mt-1">{isRtl ? 'قضية أُنجزت' : 'Cases Done'}</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold font-mono tabular-nums text-stone-950 dark:text-white">45</div>
-                  <div className="text-xs text-stone-600 dark:text-stone-400 mt-1">
-                    {isRtl ? 'قرية ومخيماً غطتها العيادة المتنقلة' : 'Communities Reached'}
-                  </div>
+                  <div className="text-2xl font-bold font-mono tabular-nums text-stone-950 dark:text-white">14</div>
+                  <div className="text-xs text-stone-600 dark:text-stone-400 mt-1">{isRtl ? 'محافظة وتجمع' : 'Governorates'}</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold font-mono tabular-nums text-stone-950 dark:text-white">100%</div>
-                  <div className="text-xs text-stone-600 dark:text-stone-400 mt-1">
-                    {isRtl ? 'شفافية وتدقيق مالي مستقل' : 'Audited Governance'}
+                  <div className="text-xs text-stone-600 dark:text-stone-400 mt-1">{isRtl ? 'خدمات مجانية' : 'Free Aid'}</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Hero Image from Unsplash */}
+            <div className="lg:col-span-5">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl border border-stone-200 dark:border-stone-800">
+                <img
+                  src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1000&q=80"
+                  alt="Justice and Legal Aid"
+                  className="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent flex items-end p-6">
+                  <div className="text-white text-xs font-medium">
+                    <span className="block font-bold text-sm text-amber-300 mb-1">{isRtl ? 'العدالة وسيادة القانون' : 'Justice & Rule of Law'}</span>
+                    {isRtl ? 'دعم قضائي واستشارات احترافية لحماية الحقوق اليومية' : 'Professional legal support safeguarding daily rights'}
                   </div>
                 </div>
               </div>
-
             </div>
 
-            {/* Visual Column: Hero Image with Dignified Framing */}
-            <div className="lg:col-span-5 flex flex-col justify-center">
-              <div className="relative overflow-hidden rounded-2xl border border-stone-300 bg-stone-100 shadow-sm dark:border-stone-800 dark:bg-stone-900">
-                <img
-                  src="/src/assets/images/hero_justice_palestine_legal_1794225901073.jpg"
-                  alt="Dignified Legal Aid and Rights Center in Palestine"
-                  referrerPolicy="no-referrer"
-                  className="h-96 w-full object-cover lg:h-[480px]"
-                />
-                <div className="border-t border-stone-200 bg-white/95 p-5 backdrop-blur dark:border-stone-800 dark:bg-stone-900/95">
-                  <div className="flex items-center justify-between text-xs text-stone-500 dark:text-stone-400">
-                    <div className="flex items-center gap-2">
-                      <img
-                        src="/assets/aistudio/logo_b3627de6.png"
-                        alt="شعار جمعية أسرار"
-                        className="h-6 w-6 object-contain rounded-full bg-white p-0.5 shadow-2xs"
-                      />
-                      <span className="font-semibold text-stone-800 dark:text-stone-200">{isRtl ? 'جمعية أسرار للمساعدة القانونية' : 'Asrar Legal Aid Association'}</span>
-                    </div>
-                    <a href="https://www.asrarlegal.org" target="_blank" rel="noopener noreferrer" className="font-mono underline hover:text-stone-900 dark:hover:text-white">
-                      www.asrarlegal.org
-                    </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. LEGAL SERVICES SECTION */}
+      <section id="services" className="border-b border-stone-200 bg-white py-16 dark:border-stone-800 dark:bg-stone-900">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider">
+              {isRtl ? 'مجالات الاختصاص' : 'Areas of Expertise'}
+            </span>
+            <h2 className="text-3xl font-serif font-bold text-stone-900 dark:text-white mt-2">
+              {isRtl ? 'خدماتنا القانونية والقضائية المتخصصة' : 'Specialized Legal & Judicial Services'}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {LEGAL_CATEGORIES.map((cat, idx) => (
+              <div key={cat.id} className="p-6 rounded-xl border border-stone-200 dark:border-stone-800 bg-[#FAF8F5] dark:bg-stone-950 flex flex-col justify-between hover:border-amber-700/50 transition-colors">
+                <div>
+                  <div className="w-10 h-10 rounded-lg bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-400 flex items-center justify-center font-bold mb-4 font-mono text-sm">
+                    0{idx + 1}
                   </div>
-                  <p className="mt-1 text-sm font-semibold text-stone-900 dark:text-white">
-                    {isRtl
-                      ? 'رسالتنا: لا ينبغي أن يُحرم أحد من العدالة بسبب عدم قدرته المادية'
-                      : 'Our core belief: No one should be denied justice due to inability to pay'}
+                  <h3 className="text-base font-bold text-stone-900 dark:text-white mb-2">
+                    {isRtl ? cat.labelAr : cat.labelEn}
+                  </h3>
+                  <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+                    {isRtl 
+                      ? 'تمثيل قانوني، صياغة لوائح دفاع، تقديم استشارات تخصصية ومواكبة إدارية وقضائية بالكامل.'
+                      : 'Full legal representation, drafting defense briefs, specialized consultations, and administrative tracking.'}
                   </p>
                 </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 2.5 DIRECT CONTACT HIGHLIGHT BANNER */}
-      <section id="contact" className="py-8 bg-amber-50 dark:bg-amber-950/30 border-b border-amber-200 dark:border-amber-900/50">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
-            
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-800 text-white dark:bg-amber-600">
-                <MapPin className="h-5 w-5" />
-              </div>
-              <div>
-                <span className="text-xs font-semibold text-amber-900 dark:text-amber-300 block">
-                  {isRtl ? 'العنوان والمقر الرسمي' : 'Official Headquarters'}
-                </span>
-                <span className="text-xs font-bold text-stone-900 dark:text-white block mt-0.5">
-                  {isRtl ? 'رام الله، شارع مؤتة، عمارة الكواكب' : 'Ramallah, Mu\'tah St, Al-Kawakeb Bldg'}
-                </span>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-800 text-white dark:bg-amber-600">
-                <Phone className="h-5 w-5" />
-              </div>
-              <div>
-                <span className="text-xs font-semibold text-amber-900 dark:text-amber-300 block">
-                  {isRtl ? 'الهاتف المباشر' : 'Direct Phone'}
-                </span>
-                <a href="tel:0587155658" className="text-xs font-bold text-stone-900 dark:text-white hover:underline font-mono block mt-0.5">
-                  0587155658
-                </a>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-800 text-white dark:bg-amber-600">
-                <Mail className="h-5 w-5" />
-              </div>
-              <div>
-                <span className="text-xs font-semibold text-amber-900 dark:text-amber-300 block">
-                  {isRtl ? 'البريد الإلكتروني' : 'Official Email'}
-                </span>
-                <a href="mailto:info@asrarlegal.org" className="text-xs font-bold text-stone-900 dark:text-white hover:underline font-mono block mt-0.5">
-                  info@asrarlegal.org
-                </a>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#1877F2] text-white">
-                <svg className="h-5 w-5 fill-current" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </div>
-              <div>
-                <span className="text-xs font-semibold text-amber-900 dark:text-amber-300 block">
-                  {isRtl ? 'صفحة الفيسبوك الرسمية' : 'Official Facebook Page'}
-                </span>
-                <a
-                  href="https://www.facebook.com/profile.php?id=61572062862017"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs font-bold text-[#1877F2] dark:text-blue-400 hover:underline block mt-0.5"
-                >
-                  {isRtl ? 'متابعة الجمعية على فيسبوك ←' : 'Follow on Facebook →'}
-                </a>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 3. CORE LEGAL SERVICES (SERVING BENEFICIARIES) */}
-      <section id="services" className="py-16 border-b border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900/40">
-        <div className="mx-auto max-w-7xl px-6">
-          
-          <div className="max-w-2xl">
-            <div className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider mb-2">
-              {isRtl ? '01. خدماتنا القانونية المجانية' : '01. Free Legal Services'}
-            </div>
-            <h2 className="text-2xl font-serif font-bold tracking-tight text-stone-900 dark:text-white sm:text-3xl">
-              {isRtl ? 'مساندة حقوقية متخصصة ومجانية لكافة الفئات المستحقة' : 'Dedicated Judicial Support for Underserved Groups'}
-            </h2>
-            <p className="mt-2 text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-              {isRtl
-                ? 'تقدم جمعية أسرار خدمات المحاماة والاستشارات القانونية المتخصصة دون أي مقابل مالي للأفراد والأسر غير القادرين، مع الحفاظ على أقصى درجات السرية المهنية.'
-                : 'Comprehensive pro-bono counsel across vital legal domains protecting human rights, property, family welfare, and fair proceedings.'}
-            </p>
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {LEGAL_CATEGORIES.map((cat, idx) => (
-              <div
-                key={cat.id}
-                className="rounded-xl border border-stone-200 bg-[#FAF8F5] p-6 transition-all hover:border-stone-300 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700"
-              >
-                <div className="flex items-center justify-between text-xs text-amber-800 dark:text-amber-400 font-mono">
-                  <span>{`0${idx + 1}`}</span>
-                  <span>{isRtl ? 'مجاني 100%' : '100% Pro Bono'}</span>
-                </div>
-
-                <h3 className="mt-4 text-base font-bold text-stone-900 dark:text-white">
-                  {isRtl ? cat.labelAr : cat.labelEn}
-                </h3>
-
-                <p className="mt-2 text-xs leading-relaxed text-stone-600 dark:text-stone-400">
-                  {cat.id === 'land' && (isRtl ? 'إعداد لوائح الاعتراض الإداري والقضائي، استصدار قرارات احترازية لتجميد أوامر الهدم، وتوثيق سجلات الأراضي وإثبات الملكية.' : 'Administrative appeals, injunction orders against demolition, historical land deed verification.')}
-                  {cat.id === 'family' && (isRtl ? 'التمثيل في قضايا الحضانة، النفقة، المشاهدة، حماية النساء والأطفال من العنف الأسري، والمساعدة في تحصيل حقوق الميراث.' : 'Representation in custody, alimony, civil and personal status courts, domestic protection.')}
-                  {cat.id === 'labor' && (isRtl ? 'متابعة حقوق عمال المياومة، قضايا الفصل التعسفي، إصابات العمل، تحصيل مكافأة نهاية الخدمة، ومراجعة عقود العمل.' : 'Defending laborers in wage disputes, wrongful termination, and workplace injury compensations.')}
-                  {cat.id === 'defense' && (isRtl ? 'حضور جلسات التوقيف، تقديم طلبات إخلاء السبيل بكفالة، رصد ضمانات المحاكمة العادلة، ومناهضة التوقيف غير القانوني.' : 'Representation during interrogation, bail applications, ensuring fair trial procedural standards.')}
-                  {cat.id === 'civil' && (isRtl ? 'صياغة وتدقيق العقود والاتفاقيات، الاستشارات العقارية والمدنية، وحل النزاعات المجتمعية عبر الوساطة القانونية.' : 'Drafting formal agreements, civil consultations, and community legal mediation.')}
-                  {cat.id === 'human_rights' && (isRtl ? 'توثيق الانتهاكات وفق المعايير الدولية، إعداد البلاغات العاجلة للأمم المتحدة، وإصدار التقارير الحقوقية الموثقة.' : 'Standardized documentation of violations, UN urgent appeals, and evidence-based reports.')}
-                </p>
-
-                <div className="mt-6 pt-4 border-t border-stone-200 dark:border-stone-800">
-                  <a
-                    href="#aid-form"
-                    onClick={() => setCategory(cat.labelAr)}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-900 hover:text-amber-800 dark:text-stone-200 dark:hover:text-amber-400 transition-colors"
-                  >
-                    <span>{isRtl ? 'طلب مساعدة في هذا المجال' : 'Request Assistance in this Field'}</span>
-                    {isRtl ? <ArrowLeft className="h-3.5 w-3.5" /> : <ArrowRight className="h-3.5 w-3.5" />}
+                <div className="mt-6 pt-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between text-xs font-medium text-stone-700 dark:text-stone-300">
+                  <span>{isRtl ? 'خدمة مجانية بالكامل' : 'Free Pro-Bono'}</span>
+                  <a href="#aid-form" className="text-amber-800 dark:text-amber-400 hover:underline">
+                    {isRtl ? 'اطلب استشارة ←' : 'Request Aid →'}
                   </a>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* 4. INTERACTIVE APPLICATION PORTAL & TRACKER */}
-      <section id="aid-form" className="py-16 border-b border-stone-200 bg-[#FAF8F5] dark:border-stone-800 dark:bg-stone-950">
+      {/* 4. LEGAL AID APPLICATION & STATUS TRACKER */}
+      <section id="aid-form" className="border-b border-stone-200 bg-[#FAF8F5] py-16 dark:border-stone-800 dark:bg-stone-950">
         <div className="mx-auto max-w-7xl px-6">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             
-            {/* Left: Application Form */}
-            <div className="lg:col-span-7 rounded-2xl border border-stone-200 bg-white p-8 shadow-sm dark:border-stone-800 dark:bg-stone-900">
-              <div className="flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase mb-2">
+            <div className="lg:col-span-7 bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 p-8 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-400 mb-2">
                 <FileCheck className="h-4 w-4" />
-                <span>{isRtl ? 'بوابة المواطنين والجمهور' : 'Citizens Legal Aid Portal'}</span>
+                <span>{isRtl ? 'بوابة استقبال الطلبات الإلكترونية' : 'Electronic Intake Portal'}</span>
               </div>
-              <h2 className="text-2xl font-serif font-bold text-stone-900 dark:text-white">
-                {isRtl ? 'طلب استشارة أو تمثيل قانوني مجاني' : 'Submit a Free Legal Aid Request'}
+              <h2 className="text-2xl font-serif font-bold text-stone-900 dark:text-white mb-2">
+                {isRtl ? 'نموذج طلب مساعدة واستشارة قانونية' : 'Legal Aid & Consultation Request Form'}
               </h2>
-              <p className="mt-2 text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                {isRtl
-                  ? 'املأ النموذج أدناه لتسجيل طلبك لدى جمعية أسرار للمساعدة القانونية. سيتم دراسة الطلب من قبل فريق المحامين وتعيين مستشار لمتابعة قضيتك بسرية تامة وتواصل مباشر.'
-                  : 'Submit your case details. Asrar legal panel reviews all requests confidentially and assigns an advocate within 24 hours.'}
+              <p className="text-xs text-stone-600 dark:text-stone-400 mb-6">
+                {isRtl ? 'يرجى تعبئة البيانات أدناه بدقة. سيتم مراجعة طلبك بسرية تامة من قبل الدائرة القانونية.' : 'Please fill in accurate details. Your request will be reviewed with strict confidentiality.'}
               </p>
 
-              {/* Success Alert with Reference Code */}
-              {submittedCode && (
-                <div className="mt-6 rounded-lg border border-emerald-300 bg-emerald-50 p-4 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200">
-                  <div className="flex items-center gap-2 font-bold text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                    <span>{isRtl ? 'تم تسجيل طلبك بنجاح في سجلات الجمعية!' : 'Your request has been successfully registered!'}</span>
+              {submittedCode ? (
+                <div className="p-6 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 text-center">
+                  <CheckCircle2 className="h-10 w-10 text-emerald-600 dark:text-emerald-400 mx-auto mb-3" />
+                  <h3 className="text-base font-bold text-emerald-900 dark:text-emerald-200 mb-1">
+                    {isRtl ? 'تم إرسال طلبك بنجاح!' : 'Request Submitted Successfully!'}
+                  </h3>
+                  <div className="inline-block bg-white dark:bg-stone-900 px-4 py-2 rounded-lg font-mono text-sm font-bold text-stone-950 dark:text-white border border-emerald-300 dark:border-emerald-700 my-3 select-all">
+                    {submittedCode}
                   </div>
-                  <p className="mt-1 text-xs">
-                    {isRtl ? 'رقم ملفك القانوني للمتابعة هو:' : 'Your official tracking reference code is:'}{' '}
-                    <span className="font-mono font-bold text-sm underline">{submittedCode}</span>
-                  </p>
-                  <p className="mt-1 text-[11px] text-emerald-800 dark:text-emerald-300">
-                    {isRtl ? 'احتفظ بهذا الرقم؛ يمكنك استخدامه في أداة التتبع أدناه لمعرفة حالة ملفك.' : 'Keep this code to track progress in the lookup panel.'}
-                  </p>
-                </div>
-              )}
-
-              <form onSubmit={handleSubmitRequest} className="mt-6 space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'الاسم الرباعي أو الرمز المستعار' : 'Full Name or Alias'} *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={fullName}
-                      onChange={(e) => setFullName(e.target.value)}
-                      placeholder={isRtl ? 'مثال: محمد أحمد مصطفى' : 'Full Name'}
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'رقم الهاتف للتواصل المباشر' : 'Phone Number'} *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder="0599xxxxxx / 0587..."
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    />
+                    <button
+                      onClick={() => setSubmittedCode(null)}
+                      className="text-xs font-semibold text-emerald-800 dark:text-emerald-400 hover:underline"
+                    >
+                      {isRtl ? '← تقديم طلب آخر' : '← Submit Another Request'}
+                    </button>
                   </div>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmitRequest} className="space-y-4 text-xs">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">
+                        {isRtl ? 'الاسم الكامل (أو الأحرف الأولى للسرية)*' : 'Full Name or Initials*'}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        placeholder="أ. م. خ."
+                        className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-amber-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">
+                        {isRtl ? 'رقم الهاتف / الواتساب للتواصل*' : 'Phone / WhatsApp*'}
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder="0599xxxxxx"
+                        className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-amber-600 font-mono"
+                      />
+                    </div>
+                  </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">
+                        {isRtl ? 'المحافظة / منطقة السكن*' : 'Governorate / Residence*'}
+                      </label>
+                      <select
+                        value={governorate}
+                        onChange={(e) => setGovernorate(e.target.value)}
+                        className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-amber-600"
+                      >
+                        {PALESTINIAN_GOVERNORATES.map((g) => (
+                          <option key={g} value={g}>{g}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">
+                        {isRtl ? 'درجة الاستعجال*' : 'Urgency Level*'}
+                      </label>
+                      <select
+                        value={urgency}
+                        onChange={(e) => setUrgency(e.target.value as any)}
+                        className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-amber-600"
+                      >
+                        <option value="عاجل جداً">{isRtl ? 'عاجل جداً (إخطار هدم / توقيف)' : 'Very Urgent'}</option>
+                        <option value="متوسط">{isRtl ? 'متوسط (نزاع عمالي / أسري)' : 'Moderate'}</option>
+                        <option value="اعتيادي">{isRtl ? 'اعتيادي (استشارة)' : 'Routine'}</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'المحافظة / مكان السكن' : 'Governorate / Location'}
+                    <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">
+                      {isRtl ? 'تصنيف القضية القانونية*' : 'Legal Category*'}
                     </label>
                     <select
-                      value={governorate}
-                      onChange={(e) => setGovernorate(e.target.value)}
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
+                      value={category}
+                      onChange={(e) => setCategory(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-amber-600"
                     >
-                      {PALESTINIAN_GOVERNORATES.map((g) => (
-                        <option key={g} value={g}>{g}</option>
+                      {LEGAL_CATEGORIES.map((cat) => (
+                        <option key={cat.id} value={cat.labelAr}>{cat.labelAr}</option>
                       ))}
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'درجة الاستعجال' : 'Urgency Level'}
+                    <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">
+                      {isRtl ? 'تفاصيل القضية والوقائع باختصار*' : 'Case Details & Summary*'}
                     </label>
-                    <select
-                      value={urgency}
-                      onChange={(e) => setUrgency(e.target.value as any)}
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    >
-                      <option value="عاجل جداً">{isRtl ? 'عاجل جداً (إخطار هدم / توقيف / مهلة قانونية تنتهي)' : 'Urgent (Demolition / Detention / Strict Deadline)'}</option>
-                      <option value="متوسط">{isRtl ? 'متوسط (دعوى قائمة / استشارة متخصصة)' : 'Medium (Ongoing dispute)'}</option>
-                      <option value="اعتيادي">{isRtl ? 'اعتيادي (استفسار حقوقي عام وتدقيق عقود)' : 'Standard (General advisory)'}</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                    {isRtl ? 'نوع المسألة القانونية' : 'Legal Category'}
-                  </label>
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                  >
-                    {LEGAL_CATEGORIES.map((c) => (
-                      <option key={c.id} value={c.labelAr}>
-                        {isRtl ? c.labelAr : c.labelEn}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                    {isRtl ? 'تفاصيل القضية أو الاستشارة القانونية' : 'Case Summary & Legal Facts'} *
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    value={details}
-                    onChange={(e) => setDetails(e.target.value)}
-                    placeholder={isRtl ? 'يرجى كتابة ملخص الوقائع، التواريخ المهمة، وما إذا كانت هناك أوراق ثبوتية أو إخطارات استلمتها...' : 'Provide relevant facts, dates, court summons, or notices...'}
-                    className="w-full rounded-lg border border-stone-300 bg-stone-50 p-3 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white resize-none"
-                  />
-                </div>
-
-                <div className="flex items-center justify-between pt-2">
-                  <div className="flex items-center gap-2 text-xs text-stone-500 dark:text-stone-400">
-                    <FolderLock className="h-4 w-4 text-amber-700 dark:text-amber-400" />
-                    <span>{isRtl ? 'بياناتكم محمية بالسرية المهنية للمحاماة' : 'Professional client confidentiality protected'}</span>
+                    <textarea
+                      required
+                      rows={4}
+                      value={details}
+                      onChange={(e) => setDetails(e.target.value)}
+                      placeholder={isRtl ? 'اكتب تفاصيل مشكلتك القانونية...' : 'Describe your legal situation...'}
+                      className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-amber-600"
+                    />
                   </div>
 
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-semibold text-white bg-stone-900 hover:bg-stone-800 dark:bg-stone-100 dark:text-stone-950 dark:hover:bg-white rounded-lg transition-colors whitespace-nowrap shadow-sm"
+                    className="w-full py-3 px-6 bg-amber-800 hover:bg-amber-900 text-white font-semibold rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2"
                   >
-                    <Send className="h-3.5 w-3.5" />
-                    <span>{isRtl ? 'إرسال الطلب للمراجعة' : 'Submit Request'}</span>
-                  </button>
-                </div>
-              </form>
-            </div>
-
-            {/* Right: Application Tracker & Hotlines */}
-            <div className="lg:col-span-5 space-y-6">
-              
-              {/* Tracker Card */}
-              <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900">
-                <div className="flex items-center gap-2 text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase mb-2">
-                  <Search className="h-4 w-4" />
-                  <span>{isRtl ? 'نظام الاستعلام والمتابعة' : 'Case Status Tracker'}</span>
-                </div>
-                <h3 className="text-lg font-serif font-bold text-stone-900 dark:text-white">
-                  {isRtl ? 'تتبع مسار طلبك القانوني' : 'Track Your Legal File'}
-                </h3>
-                <p className="mt-1 text-xs text-stone-600 dark:text-stone-400">
-                  {isRtl ? 'أدخل الرقم المرجعي للطلب للتحقق من الموقف القانوني والمحامي المكلف.' : 'Enter your case reference code to view progress updates.'}
-                </p>
-
-                <form onSubmit={handleSearchStatus} className="mt-4 flex gap-2">
-                  <input
-                    type="text"
-                    value={searchCode}
-                    onChange={(e) => setSearchCode(e.target.value)}
-                    placeholder="ASRAR-2026-..."
-                    className="flex-1 rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-xs font-mono text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                  />
-                  <button
-                    type="submit"
-                    className="px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 dark:bg-stone-100 dark:text-stone-950 dark:hover:bg-white transition-colors"
-                  >
-                    {isRtl ? 'استعلام' : 'Check'}
+                    <Send className="h-4 w-4" />
+                    <span>{isRtl ? 'إرسال طلب المساعدة القانونية' : 'Submit Legal Aid Request'}</span>
                   </button>
                 </form>
+              )}
+            </div>
 
-                {/* Quick Test Demo Codes */}
-                <div className="mt-3 flex flex-wrap items-center gap-1.5 text-[11px] text-stone-500 dark:text-stone-400">
-                  <span>{isRtl ? 'جرّب أكواد تجريبية:' : 'Try sample codes:'}</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSearchCode('ASRAR-2026-8941');
-                      const found = requestsList.find(r => r.id === 'ASRAR-2026-8941');
-                      if (found) setSearchedRequest(found);
-                    }}
-                    className="underline hover:text-stone-900 dark:hover:text-white font-mono"
-                  >
-                    ASRAR-2026-8941
-                  </button>
-                  <span>·</span>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSearchCode('ASRAR-2026-7832');
-                      const found = requestsList.find(r => r.id === 'ASRAR-2026-7832');
-                      if (found) setSearchedRequest(found);
-                    }}
-                    className="underline hover:text-stone-900 dark:hover:text-white font-mono"
-                  >
-                    ASRAR-2026-7832
-                  </button>
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              <div className="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 p-6 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-400 mb-2">
+                  <Search className="h-4 w-4" />
+                  <span>{isRtl ? 'أداة تتبع مسار الطلب' : 'Case Status Tracker'}</span>
                 </div>
+                <h3 className="text-lg font-bold text-stone-900 dark:text-white mb-2">
+                  {isRtl ? 'استعلم عن حالة ملفك القانوني' : 'Check Your Case Status'}
+                </h3>
+                <form onSubmit={handleSearchStatus} className="space-y-3 text-xs">
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={searchCode}
+                      onChange={(e) => setSearchCode(e.target.value)}
+                      placeholder="ASRAR-2026-xxxx"
+                      className="flex-1 px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white font-mono uppercase focus:outline-none focus:ring-1 focus:ring-amber-600"
+                    />
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-950 font-semibold rounded-lg hover:bg-stone-800 transition-colors"
+                    >
+                      {isRtl ? 'بحث' : 'Search'}
+                    </button>
+                  </div>
+                </form>
 
-                {/* Search Result */}
+                {searchedRequest === 'not_found' && (
+                  <div className="mt-4 p-4 rounded-lg bg-red-50 dark:bg-red-950/30 border border-red-200 text-xs text-red-800 dark:text-red-300">
+                    {isRtl ? 'لم يتم العثور على طلب بهذا الرقم المرجعي.' : 'No request found with this reference code.'}
+                  </div>
+                )}
+
                 {searchedRequest && searchedRequest !== 'not_found' && (
-                  <div className="mt-5 rounded-lg border border-stone-200 bg-stone-50 p-4 dark:border-stone-700 dark:bg-stone-800/80">
-                    <div className="flex items-center justify-between text-xs">
+                  <div className="mt-4 p-4 rounded-lg bg-stone-50 dark:bg-stone-950 border border-stone-200 text-xs space-y-2">
+                    <div className="flex justify-between items-center pb-2 border-b border-stone-200 dark:border-stone-800">
                       <span className="font-mono font-bold text-amber-800 dark:text-amber-400">{searchedRequest.id}</span>
-                      <span className="font-semibold px-2 py-0.5 rounded text-[11px] bg-stone-200 text-stone-800 dark:bg-stone-700 dark:text-stone-200">
+                      <span className="px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 font-medium">
                         {searchedRequest.status}
                       </span>
                     </div>
-                    <div className="mt-2 text-xs text-stone-700 dark:text-stone-300 space-y-1">
-                      <div><strong>{isRtl ? 'المستفيد:' : 'Beneficiary:'}</strong> {searchedRequest.fullName}</div>
-                      <div><strong>{isRtl ? 'المحافظة:' : 'Location:'}</strong> {searchedRequest.governorate}</div>
-                      <div><strong>{isRtl ? 'المحامي المكلف:' : 'Assigned Counsel:'}</strong> {searchedRequest.lawyerName || 'قيد التكليف'}</div>
-                      <div><strong>{isRtl ? 'تاريخ التسجيل:' : 'Date Registered:'}</strong> {searchedRequest.createdAt}</div>
-                    </div>
-                  </div>
-                )}
-
-                {searchedRequest === 'not_found' && (
-                  <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-900 dark:border-amber-900/60 dark:bg-amber-950/40 dark:text-amber-300">
-                    {isRtl ? 'لم يتم العثور على ملف بهذا الرقم. يرجى التأكد من الرقم أو الاتصال بنا على 0587155658.' : 'No case found matching this reference. Please verify or call 0587155658.'}
+                    <div><span className="text-stone-500">{isRtl ? 'صاحب الطلب:' : 'Applicant:'}</span> <strong className="text-stone-900 dark:text-white">{searchedRequest.fullName}</strong></div>
+                    <div><span className="text-stone-500">{isRtl ? 'المحامي المكلف:' : 'Assigned Lawyer:'}</span> <strong className="text-stone-900 dark:text-white">{searchedRequest.lawyerName}</strong></div>
                   </div>
                 )}
               </div>
 
-              {/* Consultation Photo Card */}
-              <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
-                <img
-                  src="/src/assets/images/legal_aid_consultation_1794225900412.jpg"
-                  alt="Legal Consultation Room"
-                  referrerPolicy="no-referrer"
-                  className="h-48 w-full object-cover"
-                />
-                <div className="p-5">
-                  <h4 className="text-sm font-bold text-stone-900 dark:text-white">
-                    {isRtl ? 'عيادات الاستشارة المباشرة بمقر الجمعية' : 'Direct Legal Consultations at Asrar HQ'}
-                  </h4>
-                  <p className="mt-1 text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                    {isRtl
-                      ? 'تستقبل جمعية أسرار في مقرها الرئيسي (رام الله، شارع مؤتة، عمارة الكواكب) المواطنين يومياً من الأحد إلى الخميس (9:00 ص - 4:00 م) لتقديم المشورة المباشرة وتدقيق المستندات.'
-                      : 'Asrar welcomes citizens at its HQ (Ramallah, Mu\'tah St, Al-Kawakeb Bldg) Sunday to Thursday (9:00 AM - 4:00 PM) for in-person consultation and document auditing.'}
-                  </p>
+              <div className="bg-stone-900 text-stone-200 rounded-2xl p-6 text-xs">
+                <h4 className="font-bold text-amber-300 mb-2">{isRtl ? '💡 تجربة أداة التتبع فوراً:' : '💡 Try the Tracker:'}</h4>
+                <div className="space-y-2 font-mono">
+                  <div className="flex justify-between items-center bg-black/50 p-2 rounded border border-stone-800">
+                    <span>ASRAR-2026-8941</span>
+                    <button onClick={() => setSearchCode('ASRAR-2026-8941')} className="text-amber-400 hover:underline">{isRtl ? 'تجربة' : 'Test'}</button>
+                  </div>
                 </div>
               </div>
-
             </div>
 
           </div>
-
         </div>
       </section>
 
-      {/* 5. INSTITUTIONAL FUNDING & GRANT OPPORTUNITIES (FOR DONORS) */}
-      <section id="programs" className="py-16 border-b border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900/50">
+      {/* 5. FUNDABLE PROGRAMS WITH UNSPLASH IMAGES */}
+      <section id="programs" className="border-b border-stone-200 bg-white py-16 dark:border-stone-800 dark:bg-stone-900">
         <div className="mx-auto max-w-7xl px-6">
-          
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
-            <div className="max-w-2xl">
-              <div className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider mb-2">
-                {isRtl ? '02. الشراكات البرامجية والتمويل المؤسسي' : '02. Grant Portfolios & Institutional Funding'}
-              </div>
-              <h2 className="text-2xl font-serif font-bold tracking-tight text-stone-900 dark:text-white sm:text-3xl">
-                {isRtl ? 'برامج ومشاريع نوعية جاهزة للشراكة والدعم' : 'High-Impact Fundable Programs for Institutional Donors'}
-              </h2>
-              <p className="mt-2 text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-                {isRtl
-                  ? 'تدعو جمعية أسرار للمساعدة القانونية المانحين الدوليين، الصناديق التنموية، والمؤسسات الشريكة للمساهمة في تمويل هذه البرامج الحيوية التي تمس مباشرة صمود وحقوق الفئات المهمشة في فلسطين.'
-                  : 'We invite multilateral donors, trust funds, and international partners to co-fund prioritized legal aid and justice interventions.'}
-              </p>
-            </div>
-
-            <a
-              href="#partnership"
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold text-white bg-amber-800 hover:bg-amber-900 dark:bg-amber-600 dark:hover:bg-amber-700 rounded-lg transition-colors whitespace-nowrap shrink-0 shadow-sm"
-            >
-              <HeartHandshake className="h-4 w-4" />
-              <span>{isRtl ? 'طلب ملف الشراكة والمنح' : 'Request Grant Concept Notes'}</span>
-            </a>
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider">
+              {isRtl ? 'الشراكة والمنح المؤسسية' : 'Institutional Grants & Funding'}
+            </span>
+            <h2 className="text-3xl font-serif font-bold text-stone-900 dark:text-white mt-2">
+              {isRtl ? 'مشاريعنا الاستراتيجية القابلة للتمويل' : 'Strategic Fundable Programs'}
+            </h2>
           </div>
 
-          {/* Program Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
             {FUNDABLE_PROGRAMS.map((prog) => {
-              const percentage = Math.round((prog.raisedBudget / prog.targetBudget) * 100);
+              const progressPercent = Math.min(100, Math.round((prog.raisedBudget / prog.targetBudget) * 100));
               return (
-                <div
-                  key={prog.id}
-                  className="rounded-2xl border border-stone-200 bg-[#FAF8F5] p-6 dark:border-stone-800 dark:bg-stone-900 flex flex-col justify-between"
-                >
+                <div key={prog.id} className="rounded-2xl border border-stone-200 dark:border-stone-800 bg-[#FAF8F5] dark:bg-stone-950 overflow-hidden flex flex-col justify-between shadow-sm">
                   <div>
-                    <div className="flex items-center justify-between text-xs text-amber-800 dark:text-amber-400 font-mono">
-                      <span>{prog.id}</span>
-                      <span>{prog.beneficiariesCount} {isRtl ? 'مستفيد مستهدف' : 'Beneficiaries'}</span>
-                    </div>
-
-                    <h3 className="mt-3 text-lg font-bold text-stone-900 dark:text-white font-serif">
-                      {isRtl ? prog.titleAr : prog.titleEn}
-                    </h3>
-                    <p className="text-xs text-stone-500 dark:text-stone-400 mt-0.5">
-                      {isRtl ? prog.taglineAr : prog.taglineEn}
-                    </p>
-
-                    <p className="mt-4 text-xs leading-relaxed text-stone-600 dark:text-stone-300">
-                      {isRtl ? prog.descriptionAr : prog.descriptionEn}
-                    </p>
-
-                    {/* Progress Bar */}
-                    <div className="mt-6 pt-4 border-t border-stone-200 dark:border-stone-800">
-                      <div className="flex items-center justify-between text-xs font-mono mb-2">
-                        <span className="text-stone-600 dark:text-stone-400">
-                          {isRtl ? 'الميزانية المستهدفة:' : 'Budget Target:'} <strong>${prog.targetBudget.toLocaleString()}</strong>
-                        </span>
-                        <span className="font-bold text-amber-800 dark:text-amber-400">
-                          {percentage}% {isRtl ? 'مغطى' : 'Funded'}
-                        </span>
-                      </div>
-                      <div className="h-2 w-full overflow-hidden rounded-full bg-stone-200 dark:bg-stone-800">
-                        <div
-                          style={{ width: `${percentage}%` }}
-                          className="h-full rounded-full bg-amber-800 dark:bg-amber-500"
-                        />
+                    <div className="h-48 w-full overflow-hidden relative">
+                      <img src={prog.imageUrl} alt={prog.titleAr} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+                      <div className="absolute top-3 right-3 bg-stone-900/90 text-amber-300 text-[11px] font-mono font-bold px-3 py-1 rounded-full">
+                        {progressPercent}% {isRtl ? 'ممول' : 'Funded'}
                       </div>
                     </div>
+                    <div className="p-6">
+                      <h3 className="text-lg font-bold text-stone-900 dark:text-white mb-2">
+                        {isRtl ? prog.titleAr : prog.titleEn}
+                      </h3>
+                      <p className="text-xs font-medium text-amber-800 dark:text-amber-400 mb-3">
+                        {isRtl ? prog.taglineAr : prog.taglineEn}
+                      </p>
+                      <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed mb-6">
+                        {isRtl ? prog.descriptionAr : prog.descriptionEn}
+                      </p>
 
-                    {/* Key Outcome Indicators */}
-                    <div className="mt-4 flex flex-wrap items-center gap-2 text-[11px] text-stone-500 dark:text-stone-400">
-                      {prog.indicators.map((ind, i) => (
-                        <React.Fragment key={i}>
-                          <span>{ind}</span>
-                          {i < prog.indicators.length - 1 && <span aria-hidden="true">·</span>}
-                        </React.Fragment>
-                      ))}
+                      <div className="space-y-1.5 mb-6 text-xs">
+                        <div className="flex justify-between font-mono text-stone-700 dark:text-stone-300">
+                          <span>${prog.raisedBudget.toLocaleString()} {isRtl ? 'تم جمعها' : 'Raised'}</span>
+                          <span className="text-stone-500">${prog.targetBudget.toLocaleString()} {isRtl ? 'المستهدف' : 'Target'}</span>
+                        </div>
+                        <div className="w-full bg-stone-200 dark:bg-stone-800 h-2 rounded-full overflow-hidden">
+                          <div className="bg-amber-700 h-full rounded-full" style={{ width: `${progressPercent}%` }}></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between">
-                    <button
-                      onClick={() => {
-                        const el = document.getElementById('partnership');
-                        el?.scrollIntoView({ behavior: 'smooth' });
-                        setPartnerMessage(`نحن مهتمون بدعم وتمويل: ${isRtl ? prog.titleAr : prog.titleEn}`);
-                      }}
-                      className="text-xs font-semibold text-stone-900 hover:text-amber-800 dark:text-stone-200 dark:hover:text-amber-400 transition-colors inline-flex items-center gap-1"
-                    >
-                      <span>{isRtl ? 'رعاية وتمويل هذا المشروع' : 'Sponsor this Program'}</span>
-                      {isRtl ? <ArrowLeft className="h-3 w-3" /> : <ArrowRight className="h-3 w-3" />}
-                    </button>
-                    <span className="text-[11px] text-stone-500 dark:text-stone-400 font-mono">
-                      {isRtl ? 'تقارير أثر دورية مدققة' : 'Audited Impact Reports'}
+                  <div className="p-6 pt-0 flex items-center justify-between border-t border-stone-200 dark:border-stone-800 mt-4">
+                    <span className="text-xs text-stone-500 font-mono">
+                      👥 {prog.beneficiariesCount} {isRtl ? 'مستفيد' : 'Beneficiaries'}
                     </span>
+                    <a href="#partnership" className="px-4 py-2 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-950 text-xs font-semibold rounded-lg hover:bg-stone-800 transition-colors">
+                      {isRtl ? 'دعم المشروع' : 'Support'}
+                    </a>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Mobile Clinic Photo Spotlight */}
-          <div className="mt-12 overflow-hidden rounded-2xl border border-stone-200 bg-[#FAF8F5] dark:border-stone-800 dark:bg-stone-900">
-            <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-              <div className="lg:col-span-6 p-8">
-                <div className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase mb-2">
-                  {isRtl ? 'الأثر الميداني المباشر' : 'Grassroots Outreach'}
-                </div>
-                <h3 className="text-2xl font-serif font-bold text-stone-900 dark:text-white">
-                  {isRtl ? 'العيادات القانونية المتنقلة في القرى والمخيمات' : 'Mobile Legal Units Reaching Isolated Communities'}
-                </h3>
-                <p className="mt-4 text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed font-sans">
-                  {isRtl
-                    ? 'بفضل دعم الشركاء، تسير جمعية أسرار مركبات مجهزة كعيادات قانونية متنقلة تصل للمزارعين، النساء، وسكان التجمعات البدوية والقرى المحاطة بالجدار، لتوفير الاستشارة على الأرض وتجهيز ملفات تثبيت الملكية دون تكليف المواطن عناء السفر وتكاليفه.'
-                    : 'Our mobile legal vehicles bring specialized advocates directly to rural Palestinian villages and refugee camps, establishing on-site advisory desks to draft land title objections and resolve urgent disputes.'}
-                </p>
-                <div className="mt-6 flex items-center gap-4 text-xs text-stone-500 dark:text-stone-400">
-                  <span>{isRtl ? 'تغطية مستمرة على مدار العام' : 'Year-round Operations'}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{isRtl ? 'استجابة سريعة لإخطارات الهدم' : 'Rapid Emergency Dispatch'}</span>
-                </div>
-              </div>
-              <div className="lg:col-span-6">
-                <img
-                  src="/src/assets/images/mobile_legal_clinic_rural_1794225901745.jpg"
-                  alt="Mobile Legal Aid Clinic in Rural Palestine"
-                  referrerPolicy="no-referrer"
-                  className="h-80 w-full object-cover lg:h-96"
-                />
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 6. INTERACTIVE DONOR IMPACT CALCULATOR */}
-      <section className="py-16 border-b border-stone-200 bg-[#FAF8F5] dark:border-stone-800 dark:bg-stone-950">
-        <div className="mx-auto max-w-7xl px-6">
-          
-          <div className="rounded-2xl border border-stone-200 bg-white p-8 dark:border-stone-800 dark:bg-stone-900 shadow-sm">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              
-              <div className="lg:col-span-5">
-                <div className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase mb-2">
-                  {isRtl ? 'محاكي أثر المنح والتبرعات' : 'Interactive Grant Impact Simulator'}
-                </div>
-                <h3 className="text-2xl font-serif font-bold text-stone-900 dark:text-white">
-                  {isRtl ? 'شاهد الأثر الفعلي المباشر لمساهمتك' : 'Calculate the Tangible Impact of Your Funding'}
-                </h3>
-                <p className="mt-3 text-xs sm:text-sm text-stone-600 dark:text-stone-400 leading-relaxed">
-                  {isRtl
-                    ? 'في جمعية أسرار، نوجه أكثر من 88% من الميزانيات مباشرة لتكاليف المحاماة الميدانية والدفاع القضائي، مع كشوفات مالية مدققة وموثقة لكل دولار يتم إنفاقه.'
-                    : 'Over 88% of your contribution directly funds grassroots legal defense, expert engineering files, and court appearances for impoverished families.'}
-                </p>
-
-                {/* Amount Selector Buttons */}
-                <div className="mt-6">
-                  <label className="text-xs font-semibold text-stone-700 dark:text-stone-300 block mb-2">
-                    {isRtl ? 'اختر مبلغ المساهمة التقديري:' : 'Select Contribution Amount:'}
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {[250, 500, 1000, 2500, 5000, 10000].map((amt) => (
-                      <button
-                        key={amt}
-                        type="button"
-                        onClick={() => setDonationAmount(amt)}
-                        className={`px-3 py-1.5 text-xs font-mono font-semibold rounded-lg border transition-all ${
-                          donationAmount === amt
-                            ? 'bg-stone-900 text-white border-stone-900 dark:bg-white dark:text-stone-950 dark:border-white shadow-sm'
-                            : 'bg-stone-50 text-stone-700 border-stone-200 hover:border-stone-400 dark:bg-stone-800 dark:text-stone-300 dark:border-stone-700'
-                        }`}
-                      >
-                        ${amt.toLocaleString()}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-4">
-                  <label className="text-xs text-stone-500 dark:text-stone-400 block mb-1">
-                    {isRtl ? 'أو أدخل مبلغاً مخصصاً ($):' : 'Or Custom Amount ($):'}
-                  </label>
-                  <input
-                    type="number"
-                    min="50"
-                    step="50"
-                    value={donationAmount}
-                    onChange={(e) => setDonationAmount(Number(e.target.value) || 0)}
-                    className="w-full sm:w-48 rounded-lg border border-stone-300 bg-stone-50 px-3 py-1.5 text-sm font-mono text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                  />
-                </div>
-              </div>
-
-              {/* Dynamic Impact Metric Outputs */}
-              <div className="lg:col-span-7 bg-[#FAF8F5] dark:bg-stone-950 p-6 rounded-xl border border-stone-200 dark:border-stone-800">
-                <div className="text-xs font-semibold text-stone-500 dark:text-stone-400 mb-4 pb-2 border-b border-stone-200 dark:border-stone-800">
-                  {isRtl ? `مساهمة بقيمة $${donationAmount.toLocaleString()} تحقق على الأرض:` : `A $${donationAmount.toLocaleString()} grant directly achieves:`}
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-2">
-                  <div className="p-4 bg-white dark:bg-stone-900 rounded-lg border border-stone-200 dark:border-stone-800">
-                    <div className="text-2xl font-bold font-mono text-amber-800 dark:text-amber-400">
-                      {impactMetrics.cases}
-                    </div>
-                    <div className="text-xs font-semibold text-stone-900 dark:text-white mt-1">
-                      {isRtl ? 'قضية تمثيل قضائي كامل' : 'Full Court Defense Cases'}
-                    </div>
-                    <div className="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">
-                      {isRtl ? 'ترافع أمام المحاكم حتى صدور الحكم' : 'Complete representation through verdict'}
-                    </div>
-                  </div>
-
-                  <div className="p-4 bg-white dark:bg-stone-900 rounded-lg border border-stone-200 dark:border-stone-800">
-                    <div className="text-2xl font-bold font-mono text-amber-800 dark:text-amber-400">
-                      {impactMetrics.consultations}
-                    </div>
-                    <div className="text-xs font-semibold text-stone-900 dark:text-white mt-1">
-                      {isRtl ? 'ساعة استشارة قانونية فردية' : 'Pro Bono Counseling Hours'}
-                    </div>
-                    <div className="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">
-                      {isRtl ? 'تقديم حلول قانونية فورية وتدقيق وثائق' : 'Direct advisory for families & workers'}
-                    </div>
-                  </div>
-
-                  <div className="p-4 bg-white dark:bg-stone-900 rounded-lg border border-stone-200 dark:border-stone-800">
-                    <div className="text-2xl font-bold font-mono text-amber-800 dark:text-amber-400">
-                      {impactMetrics.outreachHours}
-                    </div>
-                    <div className="text-xs font-semibold text-stone-900 dark:text-white mt-1">
-                      {isRtl ? 'ساعة عمل عيادة متنقلة' : 'Mobile Clinic Field Hours'}
-                    </div>
-                    <div className="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">
-                      {isRtl ? 'في القرى والمخيمات النائية' : 'In isolated and threatened villages'}
-                    </div>
-                  </div>
-
-                  <div className="p-4 bg-white dark:bg-stone-900 rounded-lg border border-stone-200 dark:border-stone-800">
-                    <div className="text-2xl font-bold font-mono text-amber-800 dark:text-amber-400">
-                      {impactMetrics.printedGuides}
-                    </div>
-                    <div className="text-xs font-semibold text-stone-900 dark:text-white mt-1">
-                      {isRtl ? 'دليل حقوقي توعوي مطبوع وموزع' : 'Rights Handbooks Distributed'}
-                    </div>
-                    <div className="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">
-                      {isRtl ? 'تمكين المواطنين من معرفة حقوقهم' : 'Empowering communities with legal literacy'}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-4 pt-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between">
-                  <span className="text-xs text-stone-500 dark:text-stone-400">
-                    {isRtl ? 'يتم إصدار تقارير تدقيق وشهادات استلام رسمية لكل مانح.' : 'Official financial receipts and audit certificates issued.'}
-                  </span>
-                  <a
-                    href="#partnership"
-                    className="text-xs font-bold text-amber-800 dark:text-amber-400 hover:underline"
-                  >
-                    {isRtl ? 'تثبيت التبرع والشراكة ←' : 'Formalize Grant Partnership →'}
-                  </a>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 7. INSTITUTIONAL GOVERNANCE, TRANSPARENCY & AUDIT */}
-      <section id="governance" className="py-16 border-b border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900/40">
-        <div className="mx-auto max-w-7xl px-6">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div className="lg:col-span-6">
-              <div className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider mb-2">
-                {isRtl ? '03. النزاهة والحوكمة والامتثال' : '03. Transparency & Certified Governance'}
-              </div>
-              <h2 className="text-2xl font-serif font-bold tracking-tight text-stone-900 dark:text-white sm:text-3xl">
-                {isRtl ? 'التزام مطلق بالشفافية والتدقيق المالي المستقل' : 'Rigorous Institutional Governance & External Audits'}
-              </h2>
-              <p className="mt-4 text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed font-sans">
-                {isRtl
-                  ? 'تعمل جمعية أسرار للمساعدة القانونية وفق أعلى معايير الحوكمة الرشيدة للجمعيات الأهلية، وتخضع حساباتها لتدقيق سنوي من قبل شركة تدقيق حسابات قانونية مستقلة معتمدة، مع نشر تقارير الإنجاز والبيانات المالية سنوياً للمانحين والجمهور.'
-                  : 'Asrar Legal adheres to strict civil society financial compliance and accountability. Our accounts undergo mandatory annual auditing by licensed independent auditors, with reports published transparently.'}
+          {/* Donor Impact Calculator */}
+          <div className="rounded-2xl bg-stone-900 text-stone-100 p-8 lg:p-12">
+            <div className="max-w-3xl mx-auto text-center mb-8">
+              <h3 className="text-2xl font-serif font-bold text-white mb-2">
+                {isRtl ? 'حاسبة الأثر الإنساني والقضائي للمتبرعين' : 'Donor Impact Calculator'}
+              </h3>
+              <p className="text-xs text-stone-400">
+                {isRtl ? 'اسحب المؤشر وحدد قيمة المساهمة لمعرفة الأثر المباشر الذي تحققه.' : 'Drag the slider to see your direct legal impact.'}
               </p>
-
-              <div className="mt-6 space-y-3">
-                <div className="flex items-start gap-3 p-3 rounded-lg border border-stone-200 bg-[#FAF8F5] dark:border-stone-800 dark:bg-stone-900">
-                  <CheckCircle2 className="h-5 w-5 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
-                  <div className="text-xs">
-                    <strong className="text-stone-900 dark:text-white block">{isRtl ? 'التسجيل والترخيص الرسمي' : 'Official Legal Registration'}</strong>
-                    <span className="text-stone-600 dark:text-stone-400">
-                      {isRtl ? 'مسجلة رسمياً كجمعية خيرية غير ربحية في دولة فلسطين وممتثلة لقانون الجمعيات الخيرية والهيئات الأهلية رقم (1) لسنة 2000.' : 'Duly registered under Palestinian Law of Charitable Associations and Civil Society Organizations No. 1.'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 rounded-lg border border-stone-200 bg-[#FAF8F5] dark:border-stone-800 dark:bg-stone-900">
-                  <CheckCircle2 className="h-5 w-5 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
-                  <div className="text-xs">
-                    <strong className="text-stone-900 dark:text-white block">{isRtl ? 'مجلس إدارة ولجنة استشارية مستقلة' : 'Independent Board & Advisory Oversight'}</strong>
-                    <span className="text-stone-600 dark:text-stone-400">
-                      {isRtl ? 'تضم الجمعية نخبة من كبار المحامين والأساتذة الجامعيين والحقوقيين الفلسطينيين لضمان استقلالية القرارات وتطبيق مبادئ الشفافية.' : 'Guided by distinguished jurists, legal academics, and veteran Palestinian human rights advocates.'}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3 p-3 rounded-lg border border-stone-200 bg-[#FAF8F5] dark:border-stone-800 dark:bg-stone-900">
-                  <CheckCircle2 className="h-5 w-5 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
-                  <div className="text-xs">
-                    <strong className="text-stone-900 dark:text-white block">{isRtl ? 'التقارير المالية والسنوية المتاحة للتحميل' : 'Published Annual Audit Statements'}</strong>
-                    <span className="text-stone-600 dark:text-stone-400">
-                      {isRtl ? 'نوفر للمانحين كشوفات التكاليف الدقيقة والتقارير المالية المدققة للفترات السابقة مع مؤشرات الأثر.' : 'Financial statements and narrative impact evaluations are systematically provided to all funding bodies.'}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Download Sample Audit Package */}
-              <div className="mt-6 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={() => alert(isRtl ? 'تم تجهيز ملف التقرير السنوي المدقق 2025/2026 بصيغة PDF. للتواصل مع الإدارة: info@asrarlegal.org أو الاتصال على 0587155658' : 'Annual Audit Report 2025/2026 requested. Contact: info@asrarlegal.org or call 0587155658')}
-                  className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-stone-900 bg-stone-100 hover:bg-stone-200 dark:text-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 rounded-lg border border-stone-300 dark:border-stone-700 transition-colors"
-                >
-                  <Download className="h-3.5 w-3.5" />
-                  <span>{isRtl ? 'تحميل التقرير السنوي والمالي المدقق (PDF)' : 'Download Audited Annual Report (PDF)'}</span>
-                </button>
-              </div>
             </div>
 
-            {/* Right: Governance Report Image */}
-            <div className="lg:col-span-6">
-              <div className="overflow-hidden rounded-2xl border border-stone-300 bg-stone-100 shadow-sm dark:border-stone-800 dark:bg-stone-900">
-                <img
-                  src="/src/assets/images/governance_transparency_report_1794225900485.jpg"
-                  alt="Certified Institutional Reports and Legal Audit"
-                  referrerPolicy="no-referrer"
-                  className="h-80 w-full object-cover lg:h-96"
-                />
-                <div className="p-4 bg-white dark:bg-stone-900 border-t border-stone-200 dark:border-stone-800 text-xs text-stone-500 dark:text-stone-400">
-                  <div className="flex items-center justify-between">
-                    <span>{isRtl ? 'سجل الشفافية والأداء المؤسسي' : 'Institutional Oversight & Audit Record'}</span>
-                    <a href="https://www.asrarlegal.org" target="_blank" rel="noopener noreferrer" className="font-mono underline">
-                      www.asrarlegal.org
-                    </a>
-                  </div>
+            <div className="max-w-xl mx-auto space-y-6">
+              <div className="text-center">
+                <span className="text-4xl font-bold font-mono text-amber-300">${donationAmount}</span>
+                <span className="text-stone-400 text-xs block mt-1">{isRtl ? 'مساهمة مالية مقترحة' : 'Suggested Contribution'}</span>
+              </div>
+
+              <input
+                type="range"
+                min="100"
+                max="5000"
+                step="100"
+                value={donationAmount}
+                onChange={(e) => setDonationAmount(Number(e.target.value))}
+                className="w-full accent-amber-500 cursor-pointer"
+              />
+
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center pt-4">
+                <div className="bg-black/40 p-4 rounded-xl border border-stone-800">
+                  <div className="text-xl font-bold font-mono text-amber-300">{impactMetrics.cases}</div>
+                  <div className="text-[11px] text-stone-400 mt-1">{isRtl ? 'قضية ودعوى' : 'Cases'}</div>
+                </div>
+                <div className="bg-black/40 p-4 rounded-xl border border-stone-800">
+                  <div className="text-xl font-bold font-mono text-amber-300">{impactMetrics.consultations}</div>
+                  <div className="text-[11px] text-stone-400 mt-1">{isRtl ? 'استشارة مجانية' : 'Consultations'}</div>
+                </div>
+                <div className="bg-black/40 p-4 rounded-xl border border-stone-800">
+                  <div className="text-xl font-bold font-mono text-amber-300">{impactMetrics.outreachHours}</div>
+                  <div className="text-[11px] text-stone-400 mt-1">{isRtl ? 'ساعة عيادات' : 'Outreach Hours'}</div>
+                </div>
+                <div className="bg-black/40 p-4 rounded-xl border border-stone-800">
+                  <div className="text-xl font-bold font-mono text-amber-300">{impactMetrics.printedGuides}</div>
+                  <div className="text-[11px] text-stone-400 mt-1">{isRtl ? 'نسخة دليل' : 'Guides'}</div>
                 </div>
               </div>
             </div>
-
           </div>
 
         </div>
       </section>
 
-      {/* 8. LEGAL RIGHTS LIBRARY & GUIDES (PUBLIC LEGAL LITERACY) */}
-      <section id="library" className="py-16 border-b border-stone-200 bg-[#FAF8F5] dark:border-stone-800 dark:bg-stone-950">
-        <div className="mx-auto max-w-7xl px-6">
-          
-          <div className="max-w-2xl mb-8">
-            <div className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider mb-2">
-              {isRtl ? '04. مكتبة التوعية والحقوق' : '04. Legal Literacy & Rights Guides'}
+      {/* 6. PARTNERSHIP PROPOSAL SECTION */}
+      <section id="partnership" className="border-b border-stone-200 bg-[#FAF8F5] py-16 dark:border-stone-800 dark:bg-stone-950">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 p-8 lg:p-12 shadow-sm">
+            <div className="text-center max-w-xl mx-auto mb-8">
+              <span className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider">
+                {isRtl ? 'الشراكة الاستراتيجية' : 'Strategic Partnership'}
+              </span>
+              <h2 className="text-2xl font-serif font-bold text-stone-900 dark:text-white mt-1">
+                {isRtl ? 'تقديم مقترح شراكة أو منحة مؤسسية' : 'Submit Partnership Proposal'}
+              </h2>
             </div>
-            <h2 className="text-2xl font-serif font-bold tracking-tight text-stone-900 dark:text-white sm:text-3xl">
-              {isRtl ? 'أدلة حقوقية ومطبوعات إرشادية للمواطنين' : 'Empowering Citizens through Accessible Legal Knowledge'}
-            </h2>
-            <p className="mt-2 text-sm text-stone-600 dark:text-stone-400">
-              {isRtl
-                ? 'أدلة مبسطة أعدها كبار المحامين والباحثين في جمعية أسرار لتمكين الفئات المجتمعية من حماية حقوقهم وفهم الإجراءات القانونية.'
-                : 'Free practical manuals covering land rights, labor contracts, fair trial guarantees, and personal status claims.'}
-            </p>
+
+            {partnerSubmitted ? (
+              <div className="p-6 rounded-xl bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 text-center">
+                <CheckCircle2 className="h-10 w-10 text-emerald-600 mx-auto mb-3" />
+                <h3 className="text-base font-bold text-emerald-900 dark:text-emerald-200 mb-1">
+                  {isRtl ? 'تم إرسال مقترح الشراكة بنجاح!' : 'Submitted Successfully!'}
+                </h3>
+              </div>
+            ) : (
+              <form onSubmit={handlePartnerSubmit} className="space-y-4 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">{isRtl ? 'اسم المؤسسة*' : 'Organization*'}</label>
+                    <input type="text" required value={partnerOrg} onChange={(e) => setPartnerOrg(e.target.value)} placeholder="International Fund" className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white" />
+                  </div>
+                  <div>
+                    <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">{isRtl ? 'البريد الإلكتروني*' : 'Email*'}</label>
+                    <input type="email" required value={partnerEmail} onChange={(e) => setPartnerEmail(e.target.value)} placeholder="partner@org.org" className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block font-semibold text-stone-700 dark:text-stone-300 mb-1">{isRtl ? 'تفاصيل المقترح*' : 'Details*'}</label>
+                  <textarea required rows={4} value={partnerMessage} onChange={(e) => setPartnerMessage(e.target.value)} placeholder="Proposal details..." className="w-full px-3 py-2 rounded-lg border border-stone-300 dark:border-stone-700 bg-stone-50 dark:bg-stone-950 text-stone-900 dark:text-white" />
+                </div>
+                <button type="submit" className="w-full py-3 px-6 bg-stone-900 dark:bg-stone-100 text-white dark:text-stone-950 font-semibold rounded-lg shadow-sm">
+                  {isRtl ? 'إرسال المقترح' : 'Submit Proposal'}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. LEGAL GUIDES LIBRARY */}
+      <section id="library" className="border-b border-stone-200 bg-white py-16 dark:border-stone-800 dark:bg-stone-900">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider">{isRtl ? 'المكتبة الحقوقية' : 'Library'}</span>
+            <h2 className="text-3xl font-serif font-bold text-stone-900 dark:text-white mt-2">{isRtl ? 'الأدلة والمطبوعات القانونية' : 'Legal Handbooks'}</h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {LEGAL_GUIDES.map((guide) => (
-              <div
-                key={guide.id}
-                className="rounded-xl border border-stone-200 bg-white p-5 dark:border-stone-800 dark:bg-stone-900 flex flex-col justify-between"
-              >
+              <div key={guide.id} className="rounded-2xl border border-stone-200 dark:border-stone-800 bg-[#FAF8F5] dark:bg-stone-950 p-6 flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between text-xs text-amber-800 dark:text-amber-400">
-                    <span>{isRtl ? guide.categoryAr : guide.categoryEn}</span>
-                    <span className="font-mono text-stone-400">{guide.pages} {isRtl ? 'صفحة' : 'pages'}</span>
-                  </div>
-
-                  <h3 className="mt-3 text-sm font-bold text-stone-900 dark:text-white line-clamp-2">
-                    {isRtl ? guide.titleAr : guide.titleEn}
-                  </h3>
-
-                  <p className="mt-2 text-xs text-stone-600 dark:text-stone-400 leading-relaxed line-clamp-3">
-                    {isRtl ? guide.summaryAr : guide.summaryEn}
-                  </p>
+                  <span className="px-2.5 py-1 rounded-md bg-stone-200 dark:bg-stone-800 text-[11px] font-semibold text-stone-700 dark:text-stone-300">{guide.categoryAr}</span>
+                  <h3 className="text-base font-bold text-stone-900 dark:text-white my-3">{guide.titleAr}</h3>
+                  <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed mb-6">{guide.summaryAr}</p>
                 </div>
-
-                <div className="mt-6 pt-3 border-t border-stone-100 dark:border-stone-800 flex items-center justify-between">
-                  <span className="text-[11px] font-mono text-stone-400">{guide.fileSize}</span>
-                  <button
-                    type="button"
-                    onClick={() => alert(isRtl ? `بدء تحميل: ${guide.titleAr} (${guide.fileSize})` : `Downloading: ${guide.titleEn}`)}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-amber-800 dark:text-stone-200 dark:hover:text-amber-400 transition-colors"
-                  >
-                    <Download className="h-3.5 w-3.5" />
-                    <span>{isRtl ? 'تحميل الدليل' : 'Download'}</span>
+                <div className="pt-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between">
+                  <span className="text-[11px] font-mono text-stone-500">{guide.fileSize}</span>
+                  <button onClick={() => alert(`Downloading: ${guide.titleAr}`)} className="px-3 py-1.5 bg-amber-800 text-white text-xs font-semibold rounded-lg">
+                    {isRtl ? 'تحميل' : 'Download'}
                   </button>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* 8.5 VOLUNTEERING OPPORTUNITIES SECTION */}
-      <section id="volunteer" className="py-16 border-b border-stone-200 bg-white dark:border-stone-800 dark:bg-stone-900/60">
-        <div className="mx-auto max-w-7xl px-6">
-          
-          <div className="max-w-3xl mb-12">
-            <div className="flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider mb-2">
-              <UserCheck className="h-4 w-4" />
-              <span>{isRtl ? '05. شبكة المتطوعين والخبراء' : '05. Volunteer Legal Network'}</span>
-            </div>
-            <h2 className="text-2xl font-serif font-bold tracking-tight text-stone-900 dark:text-white sm:text-3xl">
-              {isRtl ? 'فرص التطوع مع جمعية أسرار للمساعدة القانونية' : 'Volunteering Opportunities for Lawyers & Legal Researchers'}
-            </h2>
-            <p className="mt-3 text-sm text-stone-600 dark:text-stone-300 leading-relaxed font-sans">
-              {isRtl
-                ? 'ندعو المحامين المزاولين والمتدربين والباحثين القانونيين وطلبة الحقوق للانضمام إلى شبكة أسرار القانونية التطوعية. تطوعك يمثل عوناً حقيقياً ومباشراً لأسر لا تمتلك تكاليف الدفاع، ويسهم في حماية الأرض والكرامة الإنسانية في فلسطين.'
-                : 'Join our dedicated pro-bono network. Whether providing court representation, community consultations, or legislative policy research, your expertise directly empowers marginalized communities.'}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            
-            {/* Left Info & Pillars Column */}
-            <div className="lg:col-span-5 space-y-6">
-              
-              <div className="rounded-2xl border border-stone-200 bg-[#FAF8F5] p-6 dark:border-stone-800 dark:bg-stone-900">
-                <h3 className="text-base font-bold font-serif text-stone-900 dark:text-white mb-4">
-                  {isRtl ? 'لماذا تتطوع مع جمعية أسرار؟' : 'Why Volunteer With Asrar?'}
-                </h3>
-                
-                <div className="space-y-4 text-xs text-stone-700 dark:text-stone-300">
-                  <div className="flex items-start gap-3">
-                    <Briefcase className="h-4 w-4 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-stone-900 dark:text-white block mb-0.5">
-                        {isRtl ? 'خبرة عملية وميدانية استثنائية' : 'High-Impact Practical Experience'}
-                      </strong>
-                      <span>
-                        {isRtl ? 'المشاركة في الترافع وصياغة اللوائح أمام المحاكم النظامية والشرعية في قضايا استراتيجية.' : 'Hands-on litigation and memorandum drafting in vital human rights and land defense files.'}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Award className="h-4 w-4 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-stone-900 dark:text-white block mb-0.5">
-                        {isRtl ? 'شهادات خبرة وتطوع رسمية معتمدة' : 'Official Accredited Pro Bono Certificates'}
-                      </strong>
-                      <span>
-                        {isRtl ? 'توثيق رسمي لساعات التطوع والملفات المنجزة، مع خطابات تزكية مهنية للمنح والدراسات العليا.' : 'Certified service hours record and institutional reference letters for scholarships and fellowships.'}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Users className="h-4 w-4 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
-                    <div>
-                      <strong className="text-stone-900 dark:text-white block mb-0.5">
-                        {isRtl ? 'المشاركة في العيادات المتنقلة' : 'Mobile Legal Outreach Deployment'}
-                      </strong>
-                      <span>
-                        {isRtl ? 'النزول الميداني المباشر إلى القرى والتجمعات المهمشة والمخيمات ومساندة المواطنين على أرضهم.' : 'Direct community engagement in rural villages, bedouin communities, and refugee camps.'}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-stone-200 dark:border-stone-800 flex items-center justify-between text-[11px] text-stone-500 dark:text-stone-400 font-mono">
-                  <span>{isRtl ? 'تغطية تكاليف التنقل الميداني' : 'Field Transport Stipends Provided'}</span>
-                  <span>·</span>
-                  <span>{isRtl ? 'إشراف كبار المحامين' : 'Mentorship by Senior Jurists'}</span>
-                </div>
+      {/* 8. VOLUNTEER SECTION */}
+      <section id="volunteer" className="border-b border-stone-200 bg-[#FAF8F5] py-16 dark:border-stone-800 dark:bg-stone-950">
+        <div className="mx-auto max-w-4xl px-6">
+          <div className="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 p-8 shadow-sm">
+            <h2 className="text-2xl font-serif font-bold text-stone-900 dark:text-white mb-2 text-center">{isRtl ? 'انضم إلى شبكة المحامين المتطوعين' : 'Join Volunteer Network'}</h2>
+            {volSubmittedCode ? (
+              <div className="p-4 bg-emerald-50 text-emerald-900 rounded-lg text-center text-xs">
+                {isRtl ? `تم التسجيل بنجاح! رمز التطوع: ${volSubmittedCode}` : `Registered successfully! Code: ${volSubmittedCode}`}
               </div>
-
-              {/* Quote / Institutional Pledge */}
-              <div className="rounded-2xl border border-stone-200 bg-[#FAF8F5] p-6 dark:border-stone-800 dark:bg-stone-900">
-                <div className="flex items-center gap-2 mb-2 text-amber-800 dark:text-amber-400 text-xs font-semibold">
-                  <Scale className="h-4 w-4" />
-                  <span>{isRtl ? 'ميثاق التطوع المهني' : 'Pro Bono Covenant'}</span>
+            ) : (
+              <form onSubmit={handleVolunteerSubmit} className="space-y-4 text-xs mt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <input type="text" required value={volName} onChange={(e) => setVolName(e.target.value)} placeholder={isRtl ? 'الاسم الكامل*' : 'Full Name*'} className="px-3 py-2 rounded-lg border bg-stone-50 dark:bg-stone-950" />
+                  <input type="text" required value={volPhone} onChange={(e) => setVolPhone(e.target.value)} placeholder={isRtl ? 'رقم الهاتف*' : 'Phone*'} className="px-3 py-2 rounded-lg border bg-stone-50 dark:bg-stone-950 font-mono" />
+                  <input type="email" required value={volEmail} onChange={(e) => setVolEmail(e.target.value)} placeholder={isRtl ? 'البريد الإلكتروني*' : 'Email*'} className="px-3 py-2 rounded-lg border bg-stone-50 dark:bg-stone-950" />
                 </div>
-                <blockquote className="text-xs italic text-stone-700 dark:text-stone-300 leading-relaxed font-serif">
-                  {isRtl
-                    ? '"إن العمل التطوعي القانوني ليس واجباً إنسانياً فحسب، بل هو ركيزة أساسية لصمود المجتمع الفلسطيني، وضمان ألا يُترك أي مواطن مستضعف وحيداً في مواجهة الظلم."'
-                    : '"Legal pro-bono service is not only a humanitarian duty, but a cornerstone of Palestinian resilience, ensuring no vulnerable citizen stands alone before injustice."'}
-                </blockquote>
-                <div className="mt-3 text-[11px] text-stone-500 dark:text-stone-400">
-                  {isRtl ? '— منسقية العون القانوني وشؤون المتطوعين · جمعية أسرار' : '— Pro Bono Coordination Unit · Asrar Legal'}
-                </div>
-              </div>
-
-            </div>
-
-            {/* Right: Registration Form */}
-            <div className="lg:col-span-7 rounded-2xl border border-stone-200 bg-white p-8 shadow-sm dark:border-stone-800 dark:bg-stone-900">
-              <h3 className="text-lg font-serif font-bold text-stone-900 dark:text-white">
-                {isRtl ? 'نموذج تسجيل المحامين والباحثين المتطوعين' : 'Volunteer Registration Form'}
-              </h3>
-              <p className="mt-1 text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
-                {isRtl
-                  ? 'يرجى تعبئة بياناتكم المهنية ومجال التخصص القانوني المفضل. سيتواصل معكم منسق دائرة المتطوعين بجمعية أسرار لتنسيق مجالات العمل المشترك.'
-                  : 'Complete your professional profile and preferred legal specialization. Our team will contact you to coordinate engagement.'}
-              </p>
-
-              {/* Success Notification */}
-              {volSubmittedCode && (
-                <div className="mt-6 rounded-lg border border-emerald-300 bg-emerald-50 p-4 text-emerald-900 dark:border-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-200">
-                  <div className="flex items-center gap-2 font-bold text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                    <span>{isRtl ? 'تم استلام طلب تطوعكم ببالغ التقدير والامتنان!' : 'Your volunteer application was received successfully!'}</span>
-                  </div>
-                  <p className="mt-1 text-xs">
-                    {isRtl ? 'رقم طلب التطوع المرجعي:' : 'Volunteer Registration Code:'}{' '}
-                    <span className="font-mono font-bold text-sm underline">{volSubmittedCode}</span>
-                  </p>
-                  <p className="mt-1 text-[11px] text-emerald-800 dark:text-emerald-300">
-                    {isRtl
-                      ? 'نشكر رغبتكم في إسناد قضايا شعبنا. سيتواصل معكم منسق العون القانوني قريباً عبر الهاتف أو البريد الإلكتروني.'
-                      : 'Thank you for your commitment to justice. Our pro-bono coordinator will reach out shortly.'}
-                  </p>
-                </div>
-              )}
-
-              <form onSubmit={handleVolunteerSubmit} className="mt-6 space-y-4">
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'الاسم الكامل' : 'Full Name'} *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={volName}
-                      onChange={(e) => setVolName(e.target.value)}
-                      placeholder={isRtl ? 'الاسم الثلاثي أو الرباعي' : 'Full Name'}
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'رقم الهاتف / الواتساب' : 'Phone / WhatsApp'} *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      value={volPhone}
-                      onChange={(e) => setVolPhone(e.target.value)}
-                      placeholder="0599xxxxxx / 0568..."
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'البريد الإلكتروني' : 'Email Address'} *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      value={volEmail}
-                      onChange={(e) => setVolEmail(e.target.value)}
-                      placeholder="lawyer@example.org"
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'المحافظة / مكان الإقامة' : 'Governorate / Residence'}
-                    </label>
-                    <select
-                      value={volGov}
-                      onChange={(e) => setVolGov(e.target.value)}
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    >
-                      {PALESTINIAN_GOVERNORATES.map((g) => (
-                        <option key={g} value={g}>{g}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'الصفة والوضع المهني' : 'Professional Role'}
-                    </label>
-                    <select
-                      value={volRole}
-                      onChange={(e) => setVolRole(e.target.value)}
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    >
-                      <option value="محامٍ مزاول (عضو نقابة المحامين)">{isRtl ? 'محامٍ مزاول (عضو نقابة المحامين)' : 'Practicing Lawyer (Bar Member)'}</option>
-                      <option value="محامٍ متدرب">{isRtl ? 'محامٍ متدرب' : 'Trainee Lawyer'}</option>
-                      <option value="باحث قانوني / أكاديمي">{isRtl ? 'باحث قانوني / أكاديمي' : 'Legal Researcher / Academic'}</option>
-                      <option value="خريج قانون / دراسات عليا">{isRtl ? 'خريج قانون / طالب دراسات عليا' : 'Law Graduate / Postgraduate'}</option>
-                      <option value="طالب حقوق سنة رابعة">{isRtl ? 'طالب حقوق (سنة رابعة/تخرج)' : 'Senior Law Student'}</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                      {isRtl ? 'الساعات المتاحة أسبوعياً' : 'Weekly Availability'}
-                    </label>
-                    <select
-                      value={volHours}
-                      onChange={(e) => setVolHours(e.target.value)}
-                      className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                    >
-                      <option value="2 - 4 ساعات أسبوعياً">{isRtl ? '2 - 4 ساعات أسبوعياً' : '2 - 4 hours / week'}</option>
-                      <option value="5 - 8 ساعات أسبوعياً">{isRtl ? '5 - 8 ساعات أسبوعياً' : '5 - 8 hours / week'}</option>
-                      <option value="أكثر من 8 ساعات أسبوعياً">{isRtl ? 'أكثر من 8 ساعات أسبوعياً' : '8+ hours / week'}</option>
-                      <option value="حسب الحاجة في الحملات والمهام الطارئة">{isRtl ? 'حسب الحاجة في الحملات والمهام الطارئة' : 'On-call for emergency cases'}</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* THE REQUESTED LEGAL SPECIALIZATION FIELD */}
-                <div>
-                  <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                    {isRtl ? 'مجال التخصص القانوني المفضل للمساهمة فيه' : 'Legal Field of Specialization'} *
-                  </label>
-                  <select
-                    value={volSpecialty}
-                    onChange={(e) => setVolSpecialty(e.target.value)}
-                    className="w-full rounded-lg border border-amber-300 bg-amber-50/50 px-3 py-2 text-sm text-stone-900 font-medium focus:border-stone-900 focus:outline-none dark:border-amber-900/60 dark:bg-stone-800 dark:text-white"
-                  >
-                    <option value="قضايا الأراضي والملكية ومقاومة إخطارات الهدم">{isRtl ? 'قضايا الأراضي والملكية ومقاومة إخطارات الهدم' : 'Land Rights, Property & Demolition Defense'}</option>
-                    <option value="قضايا الأسرة والأحوال الشخصية وحماية المرأة والطفل">{isRtl ? 'قضايا الأسرة والأحوال الشخصية وحماية المرأة والطفل' : 'Family Law & Domestic Protection'}</option>
-                    <option value="قانون العمل والنزاعات العمالية وحقوق العمال">{isRtl ? 'قانون العمل والنزاعات العمالية وحقوق العمال' : 'Labor Law & Workers Rights'}</option>
-                    <option value="الدفاع الجنائي وضمانات المحاكمة العادلة">{isRtl ? 'الدفاع الجنائي وضمانات المحاكمة العادلة وحالات التوقيف' : 'Criminal Defense & Fair Trial Standards'}</option>
-                    <option value="البحوث القانونية وصياغة مذكرات الموقف والدراسات">{isRtl ? 'البحوث القانونية وصياغة مذكرات الموقف والدراسات التشريعية' : 'Legal Research & Policy Memoranda'}</option>
-                    <option value="التوثيق الحقوقي والرصد والمناصرة الدولية">{isRtl ? 'التوثيق الحقوقي والرصد والمناصرة الدولية' : 'Human Rights Documentation & International Advocacy'}</option>
-                    <option value="الاستشارات المدنية العامة وحل النزاعات المجتمعية">{isRtl ? 'الاستشارات المدنية العامة والوساطة المجتمعية' : 'Civil Advisory & Community Mediation'}</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                    {isRtl ? 'شكل المساهمة والتطوع المفضل' : 'Preferred Contribution Format'}
-                  </label>
-                  <select
-                    value={volType}
-                    onChange={(e) => setVolType(e.target.value)}
-                    className="w-full rounded-lg border border-stone-300 bg-stone-50 px-3 py-2 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white"
-                  >
-                    <option value="التمثيل القضائي التطوعي والترافع أمام المحاكم">{isRtl ? 'التمثيل القضائي التطوعي والترافع أمام المحاكم (Pro Bono Cases)' : 'Pro Bono Court Representation'}</option>
-                    <option value="تقديم استشارات قانونية بمقر الجمعية برام الله">{isRtl ? 'تقديم استشارات قانونية مباشرة بمقر الجمعية برام الله' : 'Direct Consultations at Asrar Ramallah HQ'}</option>
-                    <option value="النزول الميداني مع طواقم العيادات المتنقلة">{isRtl ? 'النزول الميداني مع طواقم العيادات القانونية المتنقلة في القرى' : 'Mobile Clinic Field Deployments'}</option>
-                    <option value="إعداد البحوث وأوراق الموقف وصياغة الأدلة">{isRtl ? 'إعداد البحوث وأوراق الموقف وصياغة الأدلة التوعوية' : 'Drafting Policy Papers & Rights Guides'}</option>
-                    <option value="تنظيم وتقديم ورشات التوعية المجتمعية">{isRtl ? 'تنظيم وتقديم ورشات التوعية المجتمعية' : 'Conducting Community Awareness Workshops'}</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-stone-700 dark:text-stone-300 mb-1">
-                    {isRtl ? 'نبذة عن الخبرة السابقة أو دوافع التطوع' : 'Brief Bio or Motivation'}
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={volBio}
-                    onChange={(e) => setVolBio(e.target.value)}
-                    placeholder={isRtl ? 'أذكر نبذة موجزة عن خبراتك السابقة، وسنوات المزاولة أو مجالات الاهتمام الخاصة...' : 'Mention relevant legal experience, bar admission year, or specific interests...'}
-                    className="w-full rounded-lg border border-stone-300 bg-stone-50 p-3 text-sm text-stone-900 focus:border-stone-900 focus:outline-none dark:border-stone-700 dark:bg-stone-800 dark:text-white resize-none"
-                  />
-                </div>
-
-                <div className="flex items-center justify-between pt-2">
-                  <div className="flex items-center gap-1.5 text-xs text-stone-500 dark:text-stone-400">
-                    <UserCheck className="h-4 w-4 text-amber-700 dark:text-amber-400" />
-                    <span>{isRtl ? 'يتم حفظ السجلات بسرية وفق ميثاق التطوع المهني' : 'Handled according to our professional volunteer charter'}</span>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="inline-flex items-center gap-2 px-6 py-2.5 text-xs font-semibold text-white bg-amber-800 hover:bg-amber-900 dark:bg-amber-600 dark:hover:bg-amber-700 rounded-lg transition-colors whitespace-nowrap shadow-sm"
-                  >
-                    <Send className="h-3.5 w-3.5" />
-                    <span>{isRtl ? 'إرسال طلب الانضمام لشبكة المتطوعين' : 'Submit Volunteer Application'}</span>
-                  </button>
-                </div>
-
+                <textarea required rows={3} value={volBio} onChange={(e) => setVolBio(e.target.value)} placeholder={isRtl ? 'نبذة عن الخبرة والاختصاص*' : 'Bio & Expertise*'} className="w-full px-3 py-2 rounded-lg border bg-stone-50 dark:bg-stone-950" />
+                <button type="submit" className="w-full py-3 bg-amber-800 text-white font-semibold rounded-lg">
+                  {isRtl ? 'التسجيل للتطوع' : 'Register as Volunteer'}
+                </button>
               </form>
-            </div>
-
+            )}
           </div>
-
         </div>
       </section>
 
-      {/* 9. INSTITUTIONAL PARTNERSHIP & GRANT PROPOSAL FORM */}
-      <section id="partnership" className="py-16 bg-stone-900 text-white dark:bg-black border-t border-stone-800">
-        <div className="mx-auto max-w-7xl px-6">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            <div className="lg:col-span-5">
-              <div className="inline-flex items-center gap-2 text-xs font-semibold text-amber-400 mb-2">
-                <Building2 className="h-4 w-4" />
-                <span>{isRtl ? 'بوابة المنظمات والمانحين' : 'Institutional Partners & Donors'}</span>
-              </div>
-              <h2 className="text-3xl font-serif font-bold text-white leading-tight">
-                {isRtl ? 'كن شريكاً مع جمعية أسرار في ترسيخ العدالة' : 'Partner with Asrar Association to Advance Justice'}
-              </h2>
-              <p className="mt-4 text-xs sm:text-sm text-stone-300 leading-relaxed">
-                {isRtl
-                  ? 'ترحب جمعية أسرار للمساعدة القانونية (www.asrarlegal.org) بالشراكات الإستراتيجية مع الصناديق التنموية، المنظمات الحقوقية الإقليمية والدولية، والجهات المانحة لتوسيع مظلة العون القانوني والوصول للمناطق الأكثر تهميشاً.'
-                  : 'We invite international donors, human rights funds, and civil society alliances to collaborate on joint project proposals, sub-grants, and advocacy campaigns.'}
-              </p>
-
-              {/* Updated Official Contact Details */}
-              <div className="mt-6 space-y-3 text-xs text-stone-300">
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-4 w-4 text-amber-400 shrink-0" />
-                  <span>{isRtl ? 'المقر: رام الله، شارع مؤتة، عمارة الكواكب' : 'Address: Ramallah, Mu\'tah St, Al-Kawakeb Bldg'}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Phone className="h-4 w-4 text-amber-400 shrink-0" />
-                  <a href="tel:0587155658" className="hover:text-white font-mono">0587155658</a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Mail className="h-4 w-4 text-amber-400 shrink-0" />
-                  <a href="mailto:info@asrarlegal.org" className="hover:text-white font-mono">info@asrarlegal.org</a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Globe className="h-4 w-4 text-amber-400 shrink-0" />
-                  <a href="https://www.asrarlegal.org" target="_blank" rel="noopener noreferrer" className="hover:text-white font-mono underline">
-                    www.asrarlegal.org
-                  </a>
-                </div>
-                <div className="flex items-center gap-3">
-                  <svg className="h-4 w-4 text-[#1877F2] fill-current shrink-0" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61572062862017"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white text-blue-300 underline"
-                  >
-                    {isRtl ? 'صفحة الفيسبوك الرسمية' : 'Official Facebook Page'}
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Partnership Form */}
-            <div className="lg:col-span-7 bg-stone-800/90 p-8 rounded-2xl border border-stone-700 shadow-xl">
-              <h3 className="text-lg font-bold text-white mb-2">
-                {isRtl ? 'طلب عقد شراكة / تقديم منحة أو استفسار تمويلي' : 'Submit Partnership or Grant Inquiry'}
-              </h3>
-              <p className="text-xs text-stone-300 mb-6">
-                {isRtl
-                  ? 'سنقوم بإرسال الملف التعريفي للمشاريع (Concept Notes) واللوائح المالية المعتمدة خلال 24 ساعة.'
-                  : 'Our institutional development office will follow up with concept notes and certified audit records.'}
-              </p>
-
-              {partnerSubmitted ? (
-                <div className="p-4 rounded-lg bg-amber-900/40 border border-amber-600 text-amber-200 text-xs">
-                  <div className="font-bold flex items-center gap-2 mb-1">
-                    <CheckCircle2 className="h-4 w-4 text-amber-400" />
-                    <span>{isRtl ? 'شكراً لاهتمامكم بالشراكة!' : 'Thank you for your partnership inquiry!'}</span>
-                  </div>
-                  <span>{isRtl ? 'تم استلام بيانات منظمتكم، وسيتواصل معكم فريق جمعية أسرار قريباً عبر البريد أو الهاتف.' : 'Our director of institutional partnerships will contact you shortly.'}</span>
-                </div>
-              ) : (
-                <form onSubmit={handlePartnerSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs text-stone-300 mb-1">{isRtl ? 'اسم المنظمة / الجهة المانحة' : 'Organization Name'} *</label>
-                      <input
-                        type="text"
-                        required
-                        value={partnerOrg}
-                        onChange={(e) => setPartnerOrg(e.target.value)}
-                        placeholder={isRtl ? 'مثال: مؤسسة حقوقية دولية / صندوق تنموي' : 'e.g. Foundation / Donor Agency'}
-                        className="w-full rounded-lg border border-stone-600 bg-stone-900 px-3 py-2 text-xs text-white placeholder:text-stone-500 focus:border-amber-400 focus:outline-none"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs text-stone-300 mb-1">{isRtl ? 'البريد الإلكتروني المؤسسي' : 'Official Email'} *</label>
-                      <input
-                        type="email"
-                        required
-                        value={partnerEmail}
-                        onChange={(e) => setPartnerEmail(e.target.value)}
-                        placeholder="grants@organization.org"
-                        className="w-full rounded-lg border border-stone-600 bg-stone-900 px-3 py-2 text-xs text-white placeholder:text-stone-500 focus:border-amber-400 focus:outline-none"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs text-stone-300 mb-1">{isRtl ? 'نوع التعاون أو التمويل المستهدف' : 'Type of Collaboration / Funding'}</label>
-                    <select
-                      value={partnerType}
-                      onChange={(e) => setPartnerType(e.target.value)}
-                      className="w-full rounded-lg border border-stone-600 bg-stone-900 px-3 py-2 text-xs text-white focus:border-amber-400 focus:outline-none"
-                    >
-                      <option value="منظمة دولية / مانح مؤسسي">{isRtl ? 'تمويل مشروع كامل / منحة مؤسسية (Grant)' : 'Institutional Project Grant'}</option>
-                      <option value="ائتلاف وشراكة برامجية">{isRtl ? 'شراكة ائتلافية في مقترح مشروع (Consortium)' : 'Programmatic Consortium / Joint Bid'}</option>
-                      <option value="رعاية عيادة قانونية متنقلة">{isRtl ? 'رعاية سنوية لعيادة قانونية متنقلة' : 'Sponsoring a Mobile Legal Clinic'}</option>
-                      <option value="تبرع مباشر لصندوق الدفاع القضائي">{isRtl ? 'مساهمة في صندوق الدفاع القضائي للمستضعفين' : 'Contribution to Indigent Defense Fund'}</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-xs text-stone-300 mb-1">{isRtl ? 'رسالة / مجالات الاهتمام المحددة' : 'Message / Scope of Interest'}</label>
-                    <textarea
-                      rows={3}
-                      value={partnerMessage}
-                      onChange={(e) => setPartnerMessage(e.target.value)}
-                      placeholder={isRtl ? 'نود الاستفسار عن تفاصيل مقترحات المشاريع وإمكانية دعم الفئات في مناطق...' : 'Please specify project focus, target governorates, or budget guidelines...'}
-                      className="w-full rounded-lg border border-stone-600 bg-stone-900 p-3 text-xs text-white placeholder:text-stone-500 focus:border-amber-400 focus:outline-none resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full py-2.5 text-xs font-semibold text-stone-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors font-sans shadow-sm"
-                  >
-                    {isRtl ? 'إرسال طلب الشراكة والتمويل' : 'Send Partnership & Grant Inquiry'}
-                  </button>
-                </form>
-              )}
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 9.5 FREQUENTLY ASKED QUESTIONS (FAQ) SECTION */}
-      <section id="faq" className="py-16 border-b border-stone-200 bg-[#FAF8F5] dark:border-stone-800 dark:bg-stone-950">
-        <div className="mx-auto max-w-5xl px-6">
-          
-          <div className="max-w-3xl mb-12 text-center mx-auto">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-400 uppercase tracking-wider mb-2">
-              <HelpCircle className="h-4 w-4" />
-              <span>{isRtl ? '06. دليل الإجابات والاستفسارات' : '06. Legal Aid FAQ'}</span>
-            </div>
-            <h2 className="text-2xl font-serif font-bold tracking-tight text-stone-900 dark:text-white sm:text-3xl">
-              {isRtl ? 'أسئلة شائعة حول المساعدة القانونية' : 'Frequently Asked Questions'}
-            </h2>
-            <p className="mt-3 text-xs sm:text-sm text-stone-600 dark:text-stone-300 leading-relaxed font-sans">
-              {isRtl
-                ? 'إجابات شاملة من الفريق القانوني بجمعية أسرار توضح شروط الاستحقاق، الأوراق والوثائق الثبوتية المطلوبة، مدد دراسة الملفات، وآليات متابعة القضايا وسريتها.'
-                : 'Clear guidance on eligibility conditions, required supporting documentation, case assignment timelines, and confidentiality guarantees.'}
-            </p>
-          </div>
-
-          {/* Accordion List */}
-          <div className="space-y-3">
+      {/* 9. FAQ SECTION */}
+      <section id="faq" className="border-b border-stone-200 bg-white py-16 dark:border-stone-800 dark:bg-stone-900">
+        <div className="mx-auto max-w-4xl px-6">
+          <h2 className="text-3xl font-serif font-bold text-stone-900 dark:text-white text-center mb-12">{isRtl ? 'الأسئلة الشائعة' : 'FAQ'}</h2>
+          <div className="space-y-4">
             {FAQ_ITEMS.map((faq) => {
               const isOpen = openFaqId === faq.id;
               return (
-                <div
-                  key={faq.id}
-                  className={`rounded-xl border transition-all duration-200 overflow-hidden ${
-                    isOpen
-                      ? 'border-amber-300 bg-white shadow-sm ring-1 ring-amber-400/20 dark:border-amber-900/60 dark:bg-stone-900'
-                      : 'border-stone-200 bg-white hover:border-stone-300 dark:border-stone-800 dark:bg-stone-900/70 dark:hover:border-stone-700'
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => toggleFaq(faq.id)}
-                    className="flex w-full items-center justify-between gap-4 p-5 text-start transition-colors"
-                    aria-expanded={isOpen}
-                  >
-                    <div className="space-y-1">
-                      <span className="text-[11px] font-semibold text-amber-800 dark:text-amber-400">
-                        {isRtl ? faq.categoryAr : faq.categoryEn}
-                      </span>
-                      <h3 className="text-sm sm:text-base font-bold text-stone-900 dark:text-white">
-                        {isRtl ? faq.questionAr : faq.questionEn}
-                      </h3>
-                    </div>
-                    <div className={`p-1.5 rounded-full transition-transform duration-200 shrink-0 ${isOpen ? 'rotate-180 bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300' : 'text-stone-400 hover:text-stone-700'}`}>
-                      <ChevronDown className="h-4 w-4" />
-                    </div>
+                <div key={faq.id} className="rounded-xl border border-stone-200 dark:border-stone-800 bg-[#FAF8F5] dark:bg-stone-950 overflow-hidden">
+                  <button onClick={() => toggleFaq(faq.id)} className="w-full flex justify-between items-center p-5 text-right font-bold text-stone-900 dark:text-white text-sm">
+                    <span>{isRtl ? faq.questionAr : faq.questionEn}</span>
+                    <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
-
                   {isOpen && (
-                    <div className="px-5 pb-5 pt-1 border-t border-stone-100 dark:border-stone-800 text-xs sm:text-sm text-stone-700 dark:text-stone-300 leading-relaxed font-sans">
-                      <p>{isRtl ? faq.answerAr : faq.answerEn}</p>
+                    <div className="px-5 pb-5 pt-2 text-xs text-stone-700 dark:text-stone-300 border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900">
+                      {isRtl ? faq.answerAr : faq.answerEn}
                     </div>
                   )}
                 </div>
               );
             })}
           </div>
-
-          {/* Direct Help Card */}
-          <div className="mt-12 rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 dark:border-stone-800 dark:bg-stone-900 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div className="space-y-1 text-center sm:text-start">
-              <h4 className="text-sm font-bold text-stone-900 dark:text-white">
-                {isRtl ? 'هل لديك استفسار قانوني خاص أو لم تجد إجابة لسؤالك؟' : 'Have a specific legal question not answered above?'}
-              </h4>
-              <p className="text-xs text-stone-500 dark:text-stone-400">
-                {isRtl
-                  ? 'فريق جمعية أسرار جاهز لاستقبال اتصالاتكم أو زيارتكم في مقرنا: رام الله، شارع مؤتة، عمارة الكواكب.'
-                  : 'Contact our legal team directly at 0587155658 or visit our HQ in Ramallah, Mu\'tah St.'}
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <a
-                href="tel:0587155658"
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-stone-900 bg-stone-100 hover:bg-stone-200 dark:text-stone-100 dark:bg-stone-800 dark:hover:bg-stone-700 rounded-lg border border-stone-200 dark:border-stone-700 transition-colors"
-              >
-                <Phone className="h-3.5 w-3.5 text-amber-800 dark:text-amber-400" />
-                <span className="font-mono">0587155658</span>
-              </a>
-
-              <a
-                href="#aid-form"
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-amber-800 hover:bg-amber-900 dark:bg-amber-600 dark:hover:bg-amber-700 rounded-lg transition-colors shadow-sm"
-              >
-                <Scale className="h-3.5 w-3.5" />
-                <span>{isRtl ? 'تقديم طلب مساعدة الآن' : 'Apply for Legal Aid'}</span>
-              </a>
-            </div>
-          </div>
-
         </div>
       </section>
 
-      {/* 10. QUIET INSTITUTIONAL FOOTER */}
-      <footer className="border-t border-stone-200 bg-white py-12 px-6 text-xs text-stone-600 dark:border-stone-800 dark:bg-stone-950 dark:text-stone-400">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-stone-200 dark:border-stone-800">
-            
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-3 mb-3">
-                <img
-                  src="/assets/aistudio/logo_b3627de6.png"
-                  alt="شعار جمعية أسرار للمساعدة القانونية"
-                  className="h-12 w-12 object-contain shrink-0 rounded-full bg-white p-0.5 shadow-sm ring-1 ring-stone-200 dark:ring-stone-700"
-                />
-                <div>
-                  <span className="font-serif font-bold text-base text-stone-900 dark:text-white block">
-                    {isRtl ? 'جمعية أسرار للمساعدة القانونية' : 'Asrar Association for Legal Aid'}
-                  </span>
-                  <span className="text-[11px] text-stone-500 dark:text-stone-400">
-                    Charitable Legal Aid Association · ASRAR
-                  </span>
-                </div>
-              </div>
-              <p className="text-xs text-stone-600 dark:text-stone-400 max-w-md leading-relaxed font-sans">
-                {isRtl
-                  ? 'جمعية أهلية فلسطينية غير ربحية مسجلة رسمياً. تسعى إلى تعزيز سيادة القانون وتمكين المجتمع حقوقياً وقانونياً، وتقديم الدعم والمساعدة القانونية الشاملة للفئات المستحقة والمهمشة، وترسيخ مفاهيم العدالة والشفافية.'
-                  : 'An officially registered Palestinian non-profit NGO dedicated to the rule of law, comprehensive legal aid, and human dignity.'}
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-4 text-xs font-mono">
-                <a href="https://www.asrarlegal.org" target="_blank" rel="noopener noreferrer" className="text-amber-800 dark:text-amber-400 hover:underline">
-                  www.asrarlegal.org
-                </a>
-                <span>·</span>
-                <a href="mailto:info@asrarlegal.org" className="hover:underline">
-                  info@asrarlegal.org
-                </a>
-                <span>·</span>
-                <a href="tel:0587155658" className="hover:underline">
-                  0587155658
-                </a>
-              </div>
+      {/* 10. CONTACT SECTION */}
+      <section id="contact" className="border-b border-stone-200 bg-[#FAF8F5] py-16 dark:border-stone-800 dark:bg-stone-950">
+        <div className="mx-auto max-w-7xl px-6 grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl font-serif font-bold text-stone-900 dark:text-white mb-4">{isRtl ? 'تواصل مع جمعية أسرار' : 'Contact Asrar'}</h2>
+            <p className="text-sm text-stone-600 dark:text-stone-400 mb-6">{isRtl ? 'رام الله، شارع مؤتة، عمارة الكواكب' : 'Ramallah, Mu\'tah St'}</p>
+            <div className="space-y-3 text-xs">
+              <div>📞 <strong>0587155658</strong></div>
+              <div>✉️ <strong>contact@asrarlegal.org</strong></div>
             </div>
-
-            <div>
-              <div className="font-bold text-stone-900 dark:text-white mb-3">
-                {isRtl ? 'روابط الوصول السريع' : 'Quick Access'}
-              </div>
-              <ul className="space-y-2 text-xs">
-                <li><a href="#aid-form" className="hover:underline">{isRtl ? 'تقديم طلب مساعدة قانونية' : 'Apply for Legal Aid'}</a></li>
-                <li><a href="#programs" className="hover:underline">{isRtl ? 'برامج التمويل للمانحين' : 'Grant Programs'}</a></li>
-                <li><a href="#governance" className="hover:underline">{isRtl ? 'التقارير المالية والشفافية' : 'Financial Audits'}</a></li>
-                <li><a href="#library" className="hover:underline">{isRtl ? 'أدلة حقوق المواطن' : 'Rights Handbooks'}</a></li>
-                <li><a href="#volunteer" className="hover:underline text-amber-800 dark:text-amber-400 font-semibold">{isRtl ? 'فرص التطوع للمحامين' : 'Volunteer Pro Bono'}</a></li>
-                <li><a href="#faq" className="hover:underline">{isRtl ? 'الأسئلة الشائعة' : 'FAQ'}</a></li>
-                <li><a href="#contact" className="hover:underline">{isRtl ? 'معلومات المقر والتواصل' : 'Headquarters & Location'}</a></li>
-              </ul>
-            </div>
-
-            <div>
-              <div className="font-bold text-stone-900 dark:text-white mb-3">
-                {isRtl ? 'العنوان والتواصل المباشر' : 'Official Contact'}
-              </div>
-              <ul className="space-y-2 text-xs">
-                <li className="flex items-start gap-1.5">
-                  <MapPin className="h-3.5 w-3.5 text-amber-800 dark:text-amber-400 shrink-0 mt-0.5" />
-                  <span>{isRtl ? 'رام الله، شارع مؤتة، عمارة الكواكب' : 'Ramallah, Mu\'tah St, Al-Kawakeb Bldg'}</span>
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <Phone className="h-3.5 w-3.5 text-amber-800 dark:text-amber-400 shrink-0" />
-                  <a href="tel:0587155658" className="font-mono hover:underline">0587155658</a>
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <Mail className="h-3.5 w-3.5 text-amber-800 dark:text-amber-400 shrink-0" />
-                  <a href="mailto:info@asrarlegal.org" className="font-mono hover:underline">info@asrarlegal.org</a>
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <Globe className="h-3.5 w-3.5 text-amber-800 dark:text-amber-400 shrink-0" />
-                  <a href="https://www.asrarlegal.org" target="_blank" rel="noopener noreferrer" className="font-mono hover:underline">www.asrarlegal.org</a>
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <svg className="h-3.5 w-3.5 text-[#1877F2] fill-current shrink-0" viewBox="0 0 24 24">
-                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                  </svg>
-                  <a
-                    href="https://www.facebook.com/profile.php?id=61572062862017"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:underline text-blue-600 dark:text-blue-400"
-                  >
-                    {isRtl ? 'صفحة الفيسبوك الرسمية' : 'Facebook Page'}
-                  </a>
-                </li>
-              </ul>
-            </div>
-
           </div>
-
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-stone-500 dark:text-stone-400">
-            <div>
-              © 2026 {isRtl ? 'جمعية أسرار للمساعدة القانونية (www.asrarlegal.org). جميع الحقوق محفوظة.' : 'Asrar Legal Aid Association (www.asrarlegal.org). All rights reserved.'}
-            </div>
-            <div className="flex items-center gap-3">
-              <span>{isRtl ? 'مسجلة رسمياً في دولة فلسطين' : 'Registered in the State of Palestine'}</span>
-              <span aria-hidden="true">·</span>
-              <span>{isRtl ? 'رام الله، شارع مؤتة، عمارة الكواكب' : 'Ramallah, Palestine'}</span>
-            </div>
+          <div className="rounded-2xl border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 p-8 flex flex-col justify-center items-center text-center">
+            <MapPin className="h-10 w-10 text-amber-800 dark:text-amber-400 mb-2" />
+            <span className="font-bold text-stone-900 dark:text-white text-sm">{isRtl ? 'رام الله - شارع مؤتة' : 'Ramallah - Mu\'tah Street'}</span>
+            <a href="https://maps.google.com/?q=Ramallah+Mutah+Street" target="_blank" rel="noopener noreferrer" className="mt-4 px-4 py-2 bg-amber-800 text-white text-xs font-semibold rounded-lg">
+              {isRtl ? 'فتح في خرائط جوجل' : 'Open in Google Maps'}
+            </a>
           </div>
         </div>
-      </footer>
+      </section>
 
+      {/* 11. FOOTER */}
+      <footer className="bg-stone-900 text-stone-400 py-8 text-center text-xs">
+        <p>© 2026 {isRtl ? 'جمعية أسرار للمساعدة القانونية. جميع الحقوق محفوظة.' : 'Asrar Association for Legal Aid. All rights reserved.'}</p>
+      </footer>
     </div>
   );
 }
